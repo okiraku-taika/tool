@@ -1,199 +1,339 @@
-import React, { useMemo, useState } from "react";
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我慢できた出費を見える化するツール</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom, #fff1f2, #ffffff, #f8fafc);
+      color: #0f172a;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #f1f5f9;
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .sub {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #475569;
+    }
+    .label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .big {
+      font-size: 34px;
+      font-weight: 800;
+    }
+    .mid {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .field {
+      display: grid;
+      gap: 12px;
+    }
+    select, input, textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid #dbeafe;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: #fff;
+      font-family: inherit;
+    }
+    input, select {
+      height: 46px;
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    button.main {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 18px;
+      background: #e11d48;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .note {
+      background: #fff1f2;
+      border-radius: 18px;
+      padding: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #475569;
+    }
+    .mini {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 12px;
+      border: 1px solid #f1f5f9;
+    }
+    .entry {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid #f1f5f9;
+    }
+    .entry-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .entry-item {
+      margin-top: 4px;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .entry-amount {
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .entry-memo {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .delete-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: none;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .empty {
+      border: 1px dashed #cbd5e1;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 14px;
+      color: #64748b;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+    @media (max-width: 480px) {
+      .title { font-size: 26px; }
+      .big { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="title">我慢できた出費を<br>見える化するツール</div>
+      <div class="sub">買わなかったものを記録して、今月どれだけ出費を抑えられたかをスマホでも見やすく確認できます。</div>
+    </div>
 
-const months = [
-  "1月", "2月", "3月", "4月", "5月", "6月",
-  "7月", "8月", "9月", "10月", "11月", "12月"
-];
+    <div class="card">
+      <div class="label">選択中の月の合計</div>
+      <div class="big" id="currentMonthTotal">¥15,000</div>
+      <div class="sub" id="currentMonthText" style="margin-top:8px;font-size:13px;">4月に我慢できた合計金額です。</div>
+    </div>
 
-const initialEntries = [
-  { id: 1, month: "4月", item: "スカートを我慢", amount: 10000, memo: "" },
-  { id: 2, month: "4月", item: "靴を我慢", amount: 5000, memo: "" },
-];
-
-const yen = (value) => `¥${Number(value).toLocaleString("ja-JP")}`;
-
-export default function SavingsRestraintTracker() {
-  const [entries, setEntries] = useState(initialEntries);
-  const [selectedMonth, setSelectedMonth] = useState("4月");
-  const [item, setItem] = useState("");
-  const [amount, setAmount] = useState("");
-  const [memo, setMemo] = useState("");
-
-  const addEntry = () => {
-    const trimmed = item.trim();
-    const numericAmount = Number(amount);
-    if (!trimmed || !numericAmount || numericAmount <= 0) return;
-
-    const newEntry = {
-      id: Date.now(),
-      month: selectedMonth,
-      item: trimmed,
-      amount: numericAmount,
-      memo: memo,
-    };
-
-    setEntries((prev) => [newEntry, ...prev]);
-    setItem("");
-    setAmount("");
-    setMemo("");
-  };
-
-  const deleteEntry = (id) => {
-    setEntries((prev) => prev.filter((entry) => entry.id !== id));
-  };
-
-  const monthlyTotals = useMemo(() => {
-    return months.map((month) => ({
-      month,
-      total: entries
-        .filter((entry) => entry.month === month)
-        .reduce((sum, entry) => sum + entry.amount, 0),
-    }));
-  }, [entries]);
-
-  const currentMonthTotal = useMemo(() => {
-    return entries
-      .filter((entry) => entry.month === selectedMonth)
-      .reduce((sum, entry) => sum + entry.amount, 0);
-  }, [entries, selectedMonth]);
-
-  const totalSaved = useMemo(() => {
-    return entries.reduce((sum, entry) => sum + entry.amount, 0);
-  }, [entries]);
-
-  const cardStyle = {
-    background: "rgba(255,255,255,0.9)",
-    borderRadius: "24px",
-    padding: "16px",
-    boxShadow: "0 4px 18px rgba(15, 23, 42, 0.06)",
-    border: "1px solid #f1f5f9",
-  };
-
-  const smallLabel = {
-    fontSize: "13px",
-    color: "#64748b",
-    marginBottom: "6px",
-  };
-
-  const inputStyle = {
-    width: "100%",
-    height: "46px",
-    borderRadius: "16px",
-    border: "1px solid #dbeafe",
-    padding: "0 14px",
-    fontSize: "16px",
-    boxSizing: "border-box",
-    outline: "none",
-    background: "#fff",
-  };
-
-  const textareaStyle = {
-    width: "100%",
-    borderRadius: "16px",
-    border: "1px solid #dbeafe",
-    padding: "10px 14px",
-    fontSize: "14px",
-    boxSizing: "border-box",
-    outline: "none",
-    background: "#fff",
-    minHeight: "80px",
-  };
-
-  const buttonStyle = {
-    width: "100%",
-    height: "48px",
-    border: "none",
-    borderRadius: "18px",
-    background: "#e11d48",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: 700,
-    cursor: "pointer",
-  };
-
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: "url('/background.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        padding: "14px",
-        fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        color: "#0f172a",
-      }}
-    >
-      <div style={{ maxWidth: "720px", margin: "0 auto", display: "grid", gap: "14px" }}>
-
-        <div style={{ ...cardStyle, padding: "18px" }}>
-          <div style={{ fontSize: "26px", fontWeight: 800, lineHeight: 1.4 }}>
-            気づいたらお金が残る人になる<br />
-            我慢した金額を見える化するツール
-          </div>
-        </div>
-
-        <div style={{ ...cardStyle }}>
-          <div style={smallLabel}>今月の我慢合計</div>
-          <div style={{ fontSize: "34px", fontWeight: 800 }}>{yen(currentMonthTotal)}</div>
-        </div>
-
-        <div style={cardStyle}>
-          <div style={smallLabel}>これまでの合計（別口座へ）</div>
-          <div style={{ fontSize: "24px", fontWeight: 800 }}>{yen(totalSaved)}</div>
-        </div>
-
-        <div style={cardStyle}>
-          <div style={{ fontSize: "20px", fontWeight: 800, marginBottom: "14px" }}>記録を追加</div>
-
-          <div style={{ display: "grid", gap: "12px" }}>
-            <div>
-              <div style={smallLabel}>月</div>
-              <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} style={inputStyle}>
-                {months.map((month) => (
-                  <option key={month} value={month}>{month}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <div style={smallLabel}>我慢したもの</div>
-              <input value={item} onChange={(e) => setItem(e.target.value)} placeholder="例：バッグを我慢" style={inputStyle} />
-            </div>
-
-            <div>
-              <div style={smallLabel}>金額</div>
-              <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="例：8000" style={inputStyle} />
-            </div>
-
-            <div>
-              <div style={smallLabel}>メモ</div>
-              <textarea value={memo} onChange={(e) => setMemo(e.target.value)} placeholder="なぜ我慢できたか、気づきなど" style={textareaStyle} />
-            </div>
-
-            <button onClick={addEntry} style={buttonStyle}>記録する</button>
-          </div>
-        </div>
-
-        <div style={cardStyle}>
-          <div style={{ fontSize: "20px", fontWeight: 800, marginBottom: "14px" }}>記録一覧</div>
-          <div style={{ display: "grid", gap: "10px" }}>
-            {entries.map((entry) => (
-              <div key={entry.id} style={{ background: "#f8fafc", borderRadius: "18px", padding: "14px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div>
-                    <div style={{ fontSize: "13px", color: "#64748b" }}>{entry.month}</div>
-                    <div style={{ fontWeight: 700 }}>{entry.item}</div>
-                    <div style={{ fontSize: "20px", fontWeight: 800 }}>{yen(entry.amount)}</div>
-                    {entry.memo && <div style={{ fontSize: "13px", marginTop: "6px", color: "#475569" }}>{entry.memo}</div>}
-                  </div>
-                  <button onClick={() => deleteEntry(entry.id)}>×</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+    <div class="row2">
+      <div class="card">
+        <div class="label">記録合計</div>
+        <div class="mid" id="totalSaved">¥15,000</div>
+      </div>
+      <div class="card">
+        <div class="label">1年の目安</div>
+        <div class="mid" id="annualProjection">¥180,000</div>
       </div>
     </div>
-  );
-}
+
+    <div class="card">
+      <h2>記録を追加</h2>
+      <div class="field">
+        <div>
+          <div class="label">月</div>
+          <select id="monthSelect"></select>
+        </div>
+        <div>
+          <div class="label">我慢したもの</div>
+          <input id="itemInput" placeholder="例：バッグを我慢">
+        </div>
+        <div>
+          <div class="label">金額</div>
+          <input id="amountInput" type="number" placeholder="例：8000">
+        </div>
+        <div>
+          <div class="label">メモ</div>
+          <textarea id="memoInput" placeholder="なぜ我慢できたか、気づきなど"></textarea>
+        </div>
+        <button class="main" id="addButton">記録する</button>
+        <div class="note">例：4月にスカート10,000円、靴5,000円を我慢したら、4月の合計は15,000円として表示されます。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>月別の合計</h2>
+      <div class="grid2" id="monthlyTotals"></div>
+    </div>
+
+    <div class="card">
+      <h2>記録一覧</h2>
+      <div id="entriesList"></div>
+    </div>
+  </div>
+
+  <script>
+    const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+    let entries = [
+      { id: 1, month: "4月", item: "スカートを我慢", amount: 10000, memo: "" },
+      { id: 2, month: "4月", item: "靴を我慢", amount: 5000, memo: "" }
+    ];
+
+    const monthSelect = document.getElementById('monthSelect');
+    const itemInput = document.getElementById('itemInput');
+    const amountInput = document.getElementById('amountInput');
+    const memoInput = document.getElementById('memoInput');
+    const addButton = document.getElementById('addButton');
+    const currentMonthTotal = document.getElementById('currentMonthTotal');
+    const currentMonthText = document.getElementById('currentMonthText');
+    const totalSaved = document.getElementById('totalSaved');
+    const annualProjection = document.getElementById('annualProjection');
+    const monthlyTotals = document.getElementById('monthlyTotals');
+    const entriesList = document.getElementById('entriesList');
+
+    function yen(value) {
+      return '¥' + Number(value).toLocaleString('ja-JP');
+    }
+
+    function setupMonths() {
+      monthSelect.innerHTML = "";
+      months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        if (month === '4月') option.selected = true;
+        monthSelect.appendChild(option);
+      });
+    }
+
+    function render() {
+      const selectedMonth = monthSelect.value;
+      const monthTotal = entries.filter(e => e.month === selectedMonth).reduce((sum, e) => sum + e.amount, 0);
+      const total = entries.reduce((sum, e) => sum + e.amount, 0);
+      const usedMonths = new Set(entries.map(e => e.month)).size || 1;
+      const annual = Math.round((total * 12) / usedMonths);
+
+      currentMonthTotal.textContent = yen(monthTotal);
+      currentMonthText.textContent = selectedMonth + 'に我慢できた合計金額です。';
+      totalSaved.textContent = yen(total);
+      annualProjection.textContent = yen(annual);
+
+      monthlyTotals.innerHTML = '';
+      months.forEach(month => {
+        const total = entries.filter(e => e.month === month).reduce((sum, e) => sum + e.amount, 0);
+        const div = document.createElement('div');
+        div.className = 'mini';
+        div.innerHTML = '<div class=\"label\">' + month + '</div><div style=\"margin-top:4px;font-size:19px;font-weight:800;\">' + yen(total) + '</div>';
+        monthlyTotals.appendChild(div);
+      });
+
+      entriesList.innerHTML = '';
+      if (entries.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = 'まだ記録がありません。';
+        entriesList.appendChild(empty);
+        return;
+      }
+
+      entries.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `
+          <div class="entry-row">
+            <div style="flex:1;min-width:0;">
+              <div class="label">${entry.month}</div>
+              <div class="entry-item">${entry.item}</div>
+              <div class="entry-amount">${yen(entry.amount)}</div>
+              ${entry.memo ? `<div class="entry-memo">${entry.memo}</div>` : ''}
+            </div>
+            <button class="delete-btn" data-id="${entry.id}">×</button>
+          </div>
+        `;
+        entriesList.appendChild(div);
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = Number(btn.getAttribute('data-id'));
+          entries = entries.filter(entry => entry.id !== id);
+          render();
+        });
+      });
+    }
+
+    addButton.addEventListener('click', () => {
+      const month = monthSelect.value;
+      const item = itemInput.value.trim();
+      const amount = Number(amountInput.value);
+      const memo = memoInput.value.trim();
+
+      if (!item || !amount || amount <= 0) return;
+
+      entries.unshift({ id: Date.now(), month, item, amount, memo });
+      itemInput.value = '';
+      amountInput.value = '';
+      memoInput.value = '';
+      render();
+    });
+
+    monthSelect.addEventListener('change', render);
+
+    setupMonths();
+    render();
+  </script>
+</body>
+</html>
