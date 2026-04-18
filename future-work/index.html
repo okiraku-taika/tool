@@ -310,9 +310,14 @@ button{
 </div>
 
 <script>
-<script>
-function finish(){
+function startWork(){
   document.getElementById("form").style.display="none";
+  document.getElementById("workArea").style.display="block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function finish(){
+  document.getElementById("workArea").style.display="none";
   document.getElementById("final").style.display="block";
 
   document.getElementById("r_money").innerText = document.getElementById("money").value;
@@ -323,7 +328,7 @@ function finish(){
   document.getElementById("r_solve").innerText = document.getElementById("solve").value;
   document.getElementById("r_future").innerText = document.getElementById("future").value;
 
-  // 日付追加（ここがポイント）
+  // 日付表示
   const today = new Date();
   const formatted =
     today.getFullYear() + "年" +
@@ -332,7 +337,6 @@ function finish(){
 
   document.getElementById("today").innerText = formatted;
 }
-</script>
 </script>
 
 </body>
