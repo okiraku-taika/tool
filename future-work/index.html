@@ -435,7 +435,9 @@
       const hate = safeText(document.getElementById("hate").value);
       const solve = safeText(document.getElementById("solve").value);
       const future = safeText(document.getElementById("future").value);
-
+　　　 const today = new Date();
+      document.getElementById("todayDate").innerText =
+      today.getFullYear() + "年" + (today.getMonth()+1) + "月" + today.getDate() + "日";
       document.getElementById("r_moneyBlock").innerText =
         "必要金額： " + money + "\n" +
         "期限： " + deadline + "\n" +
