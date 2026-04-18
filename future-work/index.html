@@ -310,30 +310,29 @@ button{
 </div>
 
 <script>
-function safeText(value){
-  return value && value.trim() !== "" ? value.trim() : "未入力";
-}
-
-function startWork(){
-  document.getElementById("start").classList.add("hidden");
-  document.getElementById("form").classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
+<script>
 function finish(){
-  document.getElementById("form").style.display = "none";
-document.getElementById("final").style.display = "block";
+  document.getElementById("form").style.display="none";
+  document.getElementById("final").style.display="block";
 
-window.scrollTo(0,0);
+  document.getElementById("r_money").innerText = document.getElementById("money").value;
+  document.getElementById("r_time").innerText = document.getElementById("time").value;
+  document.getElementById("r_purpose").innerText = document.getElementById("purpose").value;
+  document.getElementById("r_ideal").innerText = document.getElementById("ideal").value;
+  document.getElementById("r_hate").innerText = document.getElementById("hate").value;
+  document.getElementById("r_solve").innerText = document.getElementById("solve").value;
+  document.getElementById("r_future").innerText = document.getElementById("future").value;
 
-document.getElementById("r_money").innerText = document.getElementById("money").value;
-document.getElementById("r_time").innerText = document.getElementById("time").value;
-document.getElementById("r_purpose").innerText = document.getElementById("purpose").value;
-document.getElementById("r_ideal").innerText = document.getElementById("ideal").value;
-document.getElementById("r_hate").innerText = document.getElementById("hate").value;
-document.getElementById("r_solve").innerText = document.getElementById("solve").value;
-document.getElementById("r_future").innerText = document.getElementById("future").value;
+  // 日付追加（ここがポイント）
+  const today = new Date();
+  const formatted =
+    today.getFullYear() + "年" +
+    (today.getMonth()+1) + "月" +
+    today.getDate() + "日";
+
+  document.getElementById("today").innerText = formatted;
 }
+</script>
 </script>
 
 </body>
