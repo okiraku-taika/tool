@@ -331,18 +331,18 @@ function startWork(){
 }
 
 function finish(){
-  document.getElementById("form").classList.add("hidden");
-  document.getElementById("final").classList.remove("hidden");
+  document.getElementById("form").style.display = "none";
+document.getElementById("final").style.display = "block";
 
-  document.getElementById("r_money").innerText = safeText(document.getElementById("money").value);
-  document.getElementById("r_time").innerText = safeText(document.getElementById("time").value);
-  document.getElementById("r_purpose").innerText = safeText(document.getElementById("purpose").value);
-  document.getElementById("r_ideal").innerText = safeText(document.getElementById("ideal").value);
-  document.getElementById("r_hate").innerText = safeText(document.getElementById("hate").value);
-  document.getElementById("r_solve").innerText = safeText(document.getElementById("solve").value);
-  document.getElementById("r_future").innerText = safeText(document.getElementById("future").value);
+window.scrollTo(0,0);
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+document.getElementById("r_money").innerText = document.getElementById("money").value;
+document.getElementById("r_time").innerText = document.getElementById("time").value;
+document.getElementById("r_purpose").innerText = document.getElementById("purpose").value;
+document.getElementById("r_ideal").innerText = document.getElementById("ideal").value;
+document.getElementById("r_hate").innerText = document.getElementById("hate").value;
+document.getElementById("r_solve").innerText = document.getElementById("solve").value;
+document.getElementById("r_future").innerText = document.getElementById("future").value;
 }
 </script>
 
