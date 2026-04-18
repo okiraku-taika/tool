@@ -4,490 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>未来設計ワーク</title>
+
 <style>
-  *{
-    box-sizing:border-box;
-  }
+*{box-sizing:border-box;}
 
-  body{
-    margin:0;
-    font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
-    background:#f7f3f1;
-    color:#4a342e;
-    line-height:1.7;
-  }
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#f7f3f1;
+  color:#4a342e;
+}
 
-  .top-floral{
-    width:100%;
-    height:88px;
-    background:url("background.jpg") center/cover;
-    border-bottom-left-radius:28px;
-    border-bottom-right-radius:28px;
-    margin-bottom:18px;
-  }
+.top{
+  height:90px;
+  background:url("background.jpg") center/cover;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
+}
 
-  .container{
-    width:100%;
-    max-width:620px;
-    margin:0 auto;
-    padding:0 18px 40px;
-  }
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px;
+}
 
-  .hero-title{
-    text-align:center;
-    font-size:28px;
-    font-weight:700;
-    margin:20px 0 10px;
-    color:#3f302c;
-  }
+.title{
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+  margin-top:20px;
+}
 
-  .hero-sub{
-    text-align:center;
-    font-size:15px;
-    color:#6d5a54;
-    margin:0 0 20px;
-  }
+.sub{
+  text-align:center;
+  color:#777;
+  margin-bottom:20px;
+}
 
-  .card{
-    background:#fff;
-    border-radius:22px;
-    padding:18px;
-    box-shadow:0 8px 24px rgba(86,55,46,0.08);
-    margin-bottom:18px;
-  }
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
 
-  .card-floral{
-    position:relative;
-    overflow:hidden;
-  }
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:30px;
+  background:#f56c86;
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  margin-top:20px;
+}
 
-  .card-floral::before{
-    content:"";
-    display:block;
-    height:10px;
-    margin:-18px -18px 14px;
-    background:url("background.jpg") center/cover;
-  }
-
-  .step-label{
-    display:inline-block;
-    background:#f8d9df;
-    color:#b44e69;
-    font-size:13px;
-    font-weight:700;
-    padding:6px 12px;
-    border-radius:999px;
-    margin-bottom:10px;
-  }
-
-  .section-title{
-    font-size:20px;
-    font-weight:700;
-    margin:0 0 8px;
-    color:#4a342e;
-  }
-
-  .section-desc{
-    font-size:14px;
-    color:#6d5a54;
-    margin:0 0 12px;
-  }
-
-  .example-box{
-    background:#fff8f9;
-    border:1px solid #f4d9df;
-    border-radius:14px;
-    padding:12px 14px;
-    font-size:13px;
-    color:#7a5f58;
-    margin:0 0 14px;
-  }
-
-  label{
-    display:block;
-    font-size:14px;
-    font-weight:700;
-    margin:14px 0 6px;
-    color:#533a33;
-  }
-
-  input, textarea{
-    width:100%;
-    border:1px solid #ead8d3;
-    border-radius:14px;
-    background:#fffdfd;
-    padding:12px 14px;
-    font-size:15px;
-    color:#4a342e;
-    outline:none;
-  }
-
-  textarea{
-    min-height:100px;
-    resize:vertical;
-  }
-
-  .button{
-    appearance:none;
-    border:none;
-    width:100%;
-    background:linear-gradient(180deg,#f97f99 0%,#ef617f 100%);
-    color:#fff;
-    font-size:18px;
-    font-weight:700;
-    padding:16px 20px;
-    border-radius:999px;
-    cursor:pointer;
-    box-shadow:0 8px 18px rgba(239,97,127,0.28);
-    margin-top:8px;
-  }
-
-  .character-top{
-    text-align:center;
-    margin:24px 0 10px;
-  }
-
-  .character-top img{
-    width:280px;
-    max-width:65%;
-    height:auto;
-  }
-
-  .summary-item{
-    padding:12px 0;
-    border-bottom:1px dashed #ead7d2;
-  }
-
-  .summary-item:last-child{
-    border-bottom:none;
-  }
-
-  .summary-label{
-    font-size:15px;
-    font-weight:700;
-    color:#7e4d45;
-    margin-bottom:6px;
-  }
-
-  .summary-value{
-    white-space:pre-wrap;
-    word-break:break-word;
-    font-size:15px;
-    color:#4a342e;
-  }
-
-  .note-box{
-    background:#fffaf4;
-    border:1px solid #f1e1c9;
-    border-radius:18px;
-    padding:18px;
-    margin-bottom:16px;
-    font-size:15px;
-  }
-
-  .small-note{
-    font-size:13px;
-    color:#756760;
-    margin-top:8px;
-  }
-
-  .final-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:16px;
-    margin-top:20px;
-  }
-
-  .speech{
-    display:inline-block;
-    background:#fff;
-    border:2px solid #e8c9c0;
-    border-radius:22px;
-    padding:14px 18px;
-    font-size:15px;
-    line-height:1.7;
-    color:#5a3d36;
-    max-width:240px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.05);
-  }
-
-  .final-character{
-    width:260px;
-    max-width:46%;
-    height:auto;
-  }
-
-  .closing{
-    text-align:center;
-    font-size:18px;
-    font-weight:700;
-    color:#7a5149;
-    margin-top:18px;
-  }
-
-  .closing-sub{
-    text-align:center;
-    font-size:14px;
-    color:#7c6b65;
-    margin-top:8px;
-  }
-
-  #workArea,
-  #finalArea{
-    display:none;
-  }
-
-  @media (max-width:480px){
-    .container{
-      padding:0 14px 32px;
-    }
-
-    .hero-title{
-      font-size:24px;
-    }
-
-    .card{
-      padding:16px;
-    }
-
-    .card-floral::before{
-      margin:-16px -16px 12px;
-    }
-
-    .character-top img{
-      width:240px;
-      max-width:72%;
-    }
-
-    .final-row{
-      gap:10px;
-    }
-
-    .speech{
-      font-size:13px;
-      padding:12px 14px;
-      max-width:190px;
-    }
-
-    .final-character{
-      max-width:42%;
-    }
-  }
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
 </style>
 </head>
+
 <body>
-  <div class="top-floral"></div>
 
-  <div class="container">
+<div class="top"></div>
 
-    <!-- 表紙 -->
-    <div id="startArea">
-      <h1 class="hero-title">未来設計ワーク</h1>
-      <p class="hero-sub">
-        頭の中にある理想を、<br>
-        言葉にして整えていきましょう。
-      </p>
+<div class="container">
 
-      <div class="card card-floral">
-        書くだけで、今の気持ちや理想が見えやすくなります。<br>
-        焦らなくて大丈夫です。<br>
-        ひとつずつ進めていきましょう。
-      </div>
+<!-- 表紙 -->
+<div id="startArea">
 
-      <div class="character-top">
-        <img src="character1.jpg" alt="スタートのキャラクター">
-      </div>
+<div class="title">未来設計ワーク</div>
 
-      <button class="button" onclick="startWork()">ワークを始める</button>
-    </div>
+<div class="sub">
+頭の中にある理想を<br>
+言葉にして整えていきましょう
+</div>
 
-    <!-- 入力画面 -->
-    <div id="workArea">
-      <h1 class="hero-title">未来設計ワーク</h1>
-      <p class="hero-sub">
-        ひとつずつ書いて、気持ちを整えていきましょう。
-      </p>
+<div class="card">
+書くだけで、今の気持ちや理想が見えやすくなります。<br>
+焦らなくて大丈夫です。<br>
+ひとつずつ進めていきましょう。
+</div>
 
-      <div class="card card-floral">
-        <div class="step-label">STEP 1</div>
-        <h2 class="section-title">お金の整理</h2>
-        <p class="section-desc">まずは、お金のことを具体的にします。</p>
+<div style="text-align:center; margin:24px 0 10px;">
+  <img src="character1.jpg" style="width:280px; max-width:65%;">
+</div>
 
-        <label for="money">自分にはいくら必要ですか？</label>
-        <input id="money" type="text" placeholder="例：100万円">
+<button onclick="startWork()">ワークを始める</button>
 
-        <label for="deadline">いつまでに必要ですか？</label>
-        <input id="deadline" type="text" placeholder="例：1年後まで">
+</div>
 
-        <label for="purpose">なんのために必要ですか？</label>
-        <textarea id="purpose" placeholder="例：生活を整えるため"></textarea>
-      </div>
+<!-- 入力 -->
+<div id="workArea" style="display:none;">
 
-      <div class="card">
-        <div class="step-label">STEP 2</div>
-        <h2 class="section-title">理想の生活</h2>
-        <p class="section-desc">今の現実は考えず、理想をそのまま書いてください。</p>
-        <div class="example-box">
-          ・時間に余裕のある生活をしている<br>
-          ・好きなことに集中できる毎日を送っている<br>
-          ・お金に対する不安がない状態で過ごしている<br>
-          ・なぜか私はうまくいく気がする
-        </div>
-        <textarea id="ideal" placeholder="ここに書いてください"></textarea>
-      </div>
+<div class="card">
+お金
+<input id="money" placeholder="例：100万円">
 
-      <div class="card">
-        <div class="step-label">STEP 3</div>
-        <h2 class="section-title">やりたくないこと</h2>
-        <p class="section-desc">まずは、やりたくないことだけを書いてください。</p>
-        <div class="example-box">
-          ・掃除<br>
-          ・洗濯<br>
-          ・食器洗い<br>
-          ・食事づくり
-        </div>
-        <textarea id="hate" placeholder="ここに書いてください"></textarea>
-      </div>
+期限
+<input id="deadline" placeholder="例：1年後">
 
-      <div class="card">
-        <div class="step-label">STEP 4</div>
-        <h2 class="section-title">解決のアイデア</h2>
-        <p class="section-desc">それならどうするか、自分の答えを書いてみましょう。</p>
-        <div class="example-box">
-          ・仕組みを変える<br>
-          ・人に任せる<br>
-          ・回数を減らす<br>
-          ・お金を使う方法も含めて自由に考える
-        </div>
-        <textarea id="solve" placeholder="ここに書いてください"></textarea>
-      </div>
+目的
+<textarea id="purpose" placeholder="例：生活を整えるため"></textarea>
+</div>
 
-      <div class="card">
-        <div class="step-label">STEP 5</div>
-        <h2 class="section-title">未来の状態</h2>
-        <p class="section-desc">数年後やその先に、こうなっていたい状態を書いてください。</p>
-        <div class="example-box">
-          ・孫にお金の心配なく好きなものを買ってあげている<br>
-          ・行きたい国へお金を気にせず旅行している<br>
-          ・ジムに通い健康的な体で過ごしている
-        </div>
-        <textarea id="future" placeholder="ここに書いてください"></textarea>
-      </div>
+<div class="card">
+理想の生活
+<textarea id="ideal">・時間に余裕のある生活をしている
+・好きなことに集中できる毎日を送っている
+・お金に対する不安がない状態で過ごしている
+・なぜか私はうまくいく気がする</textarea>
+</div>
 
-      <button class="button" onclick="finishWork()">完了する</button>
-    </div>
+<div class="card">
+やりたくないこと
+<textarea id="hate">・掃除
+・洗濯
+・食器洗い
+・食事づくり</textarea>
+</div>
 
-    <!-- 最終画面 -->
-    <div id="finalArea">
-      <p id="todayDate" style="text-align:center; color:#888; font-size:14px;"></p>
+<div class="card">
+解決方法
+<textarea id="solve">・やり方を変える
+・人に任せる
+・回数を減らす
+・お金を使う方法も考える</textarea>
+</div>
 
-      <h1 class="hero-title">ここまでできたあなたはすごいです</h1>
-      <p class="hero-sub">入力した内容を見返しやすくまとめました。</p>
+<div class="card">
+未来
+<textarea id="future">・孫にお金の心配なく好きなものを買ってあげている
+・行きたい国へお金を気にせず旅行している
+・ジムに通い健康的な体で過ごしている</textarea>
+</div>
 
-      <div class="card card-floral">
-        <div class="summary-item">
-          <div class="summary-label">お金</div>
-          <div class="summary-value" id="r_moneyBlock"></div>
-        </div>
+<button onclick="finishWork()">完了する</button>
 
-        <div class="summary-item">
-          <div class="summary-label">理想の生活</div>
-          <div class="summary-value" id="r_ideal"></div>
-        </div>
+</div>
 
-        <div class="summary-item">
-          <div class="summary-label">やりたくないこと</div>
-          <div class="summary-value" id="r_hate"></div>
-        </div>
+<!-- 最後 -->
+<div id="finalArea" style="display:none;">
 
-        <div class="summary-item">
-          <div class="summary-label">解決のアイデア</div>
-          <div class="summary-value" id="r_solve"></div>
-        </div>
+<p id="todayDate" style="text-align:center;color:#999;"></p>
 
-        <div class="summary-item">
-          <div class="summary-label">未来の状態</div>
-          <div class="summary-value" id="r_future"></div>
-        </div>
-      </div>
+<div class="card">
 
-      <div class="note-box">
-        入力内容は保存されません。<br>
-        大切な内容なのでスクリーンショットをおすすめします。<br><br>
-        あとで見返せるように保存しておきましょう。
-        <div class="small-note">※電源ボタン＋音量ボタンで保存できます</div>
-      </div>
+<div id="r_moneyBlock"></div>
+<div id="r_ideal"></div>
+<div id="r_hate"></div>
+<div id="r_solve"></div>
+<div id="r_future"></div>
 
-      <div class="card">
-        <h2 class="section-title">今日できる小さな一歩</h2>
-        <p class="section-desc">小さな一歩で大丈夫です。</p>
-        <input id="smallStep" type="text" placeholder="例：理想を1つ書き足す">
-      </div>
+</div>
 
-      <div class="final-row">
-        <div class="speech">
-          ここまでできましたね<br>
-          ここからがスタートです
-        </div>
+<div class="card">
+入力内容は保存されません<br>
+スクリーンショットをおすすめします
+</div>
 
-        <img src="character2.jpg" class="final-character" alt="完了後のキャラクター">
-      </div>
+<div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;">
 
-      <div class="closing">焦らなくて大丈夫です</div>
-      <div class="closing-sub">少しずつ整えていきましょう</div>
+<div style="background:#fff; padding:12px; border-radius:15px;">
+ここまでできましたね<br>
+ここからがスタートです
+</div>
 
-      <div style="margin-top:16px;">
-        <button class="button" onclick="restartWork()">もう一度ワークをする</button>
-      </div>
-    </div>
+<img src="character2.jpg" style="width:260px; max-width:45%;">
 
-  </div>
+</div>
 
-  <script>
-    function safeText(value) {
-      return value && value.trim() !== "" ? value.trim() : "未入力";
-    }
+<button onclick="restartWork()">もう一度ワークをする</button>
 
-    function startWork() {
-      document.getElementById("startArea").style.display = "none";
-      document.getElementById("workArea").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+</div>
 
-    function finishWork() {
-      const money = safeText(document.getElementById("money").value);
-      const deadline = safeText(document.getElementById("deadline").value);
-      const purpose = safeText(document.getElementById("purpose").value);
-      const ideal = safeText(document.getElementById("ideal").value);
-      const hate = safeText(document.getElementById("hate").value);
-      const solve = safeText(document.getElementById("solve").value);
-      const future = safeText(document.getElementById("future").value);
+</div>
 
-      document.getElementById("r_moneyBlock").innerText =
-        "必要金額： " + money + "\n" +
-        "期限： " + deadline + "\n" +
-        "目的： " + purpose;
+<script>
 
-      document.getElementById("r_ideal").innerText = ideal;
-      document.getElementById("r_hate").innerText = hate;
-      document.getElementById("r_solve").innerText = solve;
-      document.getElementById("r_future").innerText = future;
+function startWork(){
+document.getElementById("startArea").style.display="none";
+document.getElementById("workArea").style.display="block";
+}
 
-      const today = new Date();
-      document.getElementById("todayDate").innerText =
-        today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
+function finishWork(){
 
-      document.getElementById("workArea").style.display = "none";
-      document.getElementById("finalArea").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+const money=document.getElementById("money").value;
+const deadline=document.getElementById("deadline").value;
+const purpose=document.getElementById("purpose").value;
+const ideal=document.getElementById("ideal").value;
+const hate=document.getElementById("hate").value;
+const solve=document.getElementById("solve").value;
+const future=document.getElementById("future").value;
 
-    function restartWork() {
-      document.getElementById("finalArea").style.display = "none";
-      document.getElementById("startArea").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  </script>
+document.getElementById("r_moneyBlock").innerText=
+"必要金額："+money+"\n期限："+deadline+"\n目的："+purpose;
+
+document.getElementById("r_ideal").innerText=ideal;
+document.getElementById("r_hate").innerText=hate;
+document.getElementById("r_solve").innerText=solve;
+document.getElementById("r_future").innerText=future;
+
+document.getElementById("workArea").style.display="none";
+document.getElementById("finalArea").style.display="block";
+
+const today=new Date();
+document.getElementById("todayDate").innerText=
+today.getFullYear()+"年"+(today.getMonth()+1)+"月"+today.getDate()+"日";
+
+}
+
+function restartWork(){
+document.getElementById("finalArea").style.display="none";
+document.getElementById("startArea").style.display="block";
+}
+
+</script>
+
 </body>
 </html>
