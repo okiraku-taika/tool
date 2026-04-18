@@ -1,151 +1,417 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>未来設計ワーク</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>未来設計ワーク</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:sans-serif;
-  background:#f9f7f5;
-  color:#333;
-}
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      background: #fdf9f6;
+      color: #4a342e;
+      line-height: 1.7;
+    }
 
-.container{
-  max-width:420px;
-  margin:0 auto;
-  padding:16px;
-}
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 18px 40px;
+    }
 
-.title{
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
-  margin:20px 0;
-}
+    .hero-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 18px 0 10px;
+      line-height: 1.4;
+    }
 
-.card{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom:20px;
-}
+    .hero-sub {
+      text-align: center;
+      font-size: 15px;
+      color: #6a554e;
+      margin: 0 0 24px;
+    }
 
-textarea,input{
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  font-size:14px;
-}
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(86, 55, 46, 0.08);
+      margin-bottom: 18px;
+    }
 
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:24px;
-  background:#f06277;
-  color:#fff;
-  font-size:16px;
-  margin-top:20px;
-}
+    .step-label {
+      display: inline-block;
+      background: #f8d9df;
+      color: #b44e69;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
 
-.final{
-  display:none;
-}
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #4a342e;
+    }
 
-.character{
-  position:fixed;
-  right:10px;
-  bottom:10px;
-  width:90px;
-}
-</style>
+    .section-desc {
+      font-size: 14px;
+      color: #6d5a54;
+      margin: 0 0 12px;
+    }
 
+    .example-box {
+      background: #fff8f9;
+      border: 1px solid #f4d9df;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #7a5f58;
+      margin: 0 0 14px;
+    }
+
+    .example-box strong {
+      color: #b44e69;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 14px 0 6px;
+      color: #533a33;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #ead8d3;
+      border-radius: 14px;
+      background: #fffdfd;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: #4a342e;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #ef7c95;
+      box-shadow: 0 0 0 4px rgba(239, 124, 149, 0.12);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .button {
+      appearance: none;
+      border: none;
+      width: 100%;
+      background: linear-gradient(180deg, #f97f99 0%, #ef617f 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(239, 97, 127, 0.28);
+      margin-top: 8px;
+    }
+
+    .button:hover {
+      opacity: 0.96;
+    }
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    .final {
+      display: none;
+    }
+
+    .summary-card {
+      background: linear-gradient(180deg, #fffefe 0%, #fff7f8 100%);
+      border: 1px solid #f1dede;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .summary-item {
+      padding: 12px 0;
+      border-bottom: 1px dashed #ead7d2;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #7e4d45;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 15px;
+      color: #4a342e;
+    }
+
+    .note-box {
+      background: #fffaf4;
+      border: 1px solid #f1e1c9;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    .small-note {
+      font-size: 13px;
+      color: #756760;
+      margin-top: 8px;
+    }
+
+    .closing {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #7a5149;
+      margin-top: 18px;
+    }
+
+    .closing-sub {
+      text-align: center;
+      font-size: 14px;
+      color: #7c6b65;
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px 14px 32px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .card,
+      .summary-card,
+      .note-box {
+        padding: 16px;
+      }
+
+      .button {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div id="formArea">
+      <h1 class="hero-title">未来設計ワーク</h1>
+      <p class="hero-sub">
+        頭の中にある理想を、言葉にして整えていきましょう。
+      </p>
 
-<div class="container">
+      <div class="card">
+        <div class="step-label">STEP 1</div>
+        <h2 class="section-title">お金の整理</h2>
+        <p class="section-desc">
+          まずは、お金のことを具体的にしていきます。
+        </p>
 
-<div id="form">
+        <label for="money">自分にはいくら必要ですか？</label>
+        <input id="money" type="text" placeholder="例：100万円" />
 
-<div class="title">未来設計ワーク</div>
+        <label for="deadline">いつまでに必要ですか？</label>
+        <input id="deadline" type="text" placeholder="例：1年後まで" />
 
-<div class="card">
-お金はいくら必要ですか？
-<input id="money" placeholder="例：100万円">
-</div>
+        <label for="purpose">なんのために必要ですか？</label>
+        <textarea id="purpose" placeholder="例：生活の安心を増やすため、設備を整えるため"></textarea>
+      </div>
 
-<div class="card">
-理想の生活
-<textarea id="ideal"></textarea>
-</div>
+      <div class="card">
+        <div class="step-label">STEP 2</div>
+        <h2 class="section-title">理想・欲望</h2>
+        <p class="section-desc">
+          今の現実は考えず、理想をそのまま書いてください。
+        </p>
 
-<div class="card">
-やりたくないこと
-<textarea id="hate"></textarea>
-</div>
+        <div class="example-box">
+          <strong>例</strong><br>
+          ・時間に余裕のある生活をしている<br>
+          ・好きなことに集中できる毎日を送っている<br>
+          ・お金に対する不安がない状態で過ごしている<br>
+          ・なぜか私はうまくいく気がする
+        </div>
 
-<div class="card">
-解決のアイデア
-<textarea id="solve"></textarea>
-</div>
+        <label for="ideal">理想の生活</label>
+        <textarea id="ideal" placeholder="ここに書いてください"></textarea>
+      </div>
 
-<div class="card">
-未来の状態
-<textarea id="future"></textarea>
-</div>
+      <div class="card">
+        <div class="step-label">STEP 3</div>
+        <h2 class="section-title">やりたくないこと</h2>
+        <p class="section-desc">
+          まずは、やりたくないことだけを書いてください。
+        </p>
 
-<button onclick="finish()">完了する</button>
+        <div class="example-box">
+          <strong>例</strong><br>
+          ・掃除<br>
+          ・洗濯<br>
+          ・食器洗い<br>
+          ・食事づくり
+        </div>
 
-</div>
+        <label for="hate">やりたくないこと</label>
+        <textarea id="hate" placeholder="ここに書いてください"></textarea>
+      </div>
 
-<!-- 最終画面 -->
-<div id="final" class="final">
+      <div class="card">
+        <div class="step-label">STEP 4</div>
+        <h2 class="section-title">解決のアイデア</h2>
+        <p class="section-desc">
+          それならどうするか、自分の答えを書いてみましょう。
+        </p>
 
-<div class="title">ここまでできたあなたはすごいです</div>
+        <div class="example-box">
+          <strong>考えるヒント</strong><br>
+          ・仕組みを変える<br>
+          ・人に任せる<br>
+          ・回数を減らす<br>
+          ・お金を使う方法も含めて自由に考える
+        </div>
 
-<div class="card">
-<p><b>お金：</b> <span id="r_money"></span></p>
-<p><b>理想：</b><br><span id="r_ideal"></span></p>
-<p><b>やりたくない：</b><br><span id="r_hate"></span></p>
-<p><b>解決：</b><br><span id="r_solve"></span></p>
-<p><b>未来：</b><br><span id="r_future"></span></p>
-</div>
+        <label for="solve">解決のアイデア</label>
+        <textarea id="solve" placeholder="ここに書いてください"></textarea>
+      </div>
 
-<div class="card">
-入力内容は保存されません。<br>
-スクリーンショットをおすすめします。<br><br>
-※電源ボタン＋音量ボタンで保存できます
-</div>
+      <div class="card">
+        <div class="step-label">STEP 5</div>
+        <h2 class="section-title">未来の状態</h2>
+        <p class="section-desc">
+          数年後やその先に、こうなっていたい状態を書いてください。
+        </p>
 
-<div class="card">
-今日できる小さな一歩
-<input placeholder="例：100円節約する">
-</div>
+        <div class="example-box">
+          <strong>例</strong><br>
+          ・孫にお金の心配なく好きなものを買ってあげている<br>
+          ・行きたい国へお金を気にせず旅行している<br>
+          ・ジムに通い健康的な体で過ごしている
+        </div>
 
-<div class="title">焦らなくて大丈夫です<br>少しずつ整えていきましょう</div>
+        <label for="future">未来の状態</label>
+        <textarea id="future" placeholder="ここに書いてください"></textarea>
+      </div>
 
-</div>
+      <button class="button" onclick="finishWork()">完了する</button>
+    </div>
 
-</div>
+    <div id="finalArea" class="final">
+      <h1 class="hero-title">ここまでできたあなたはすごいです</h1>
+      <p class="hero-sub">
+        入力した内容を、見返しやすいようにまとめました。
+      </p>
 
-<script>
-function finish(){
-  document.getElementById("form").style.display="none";
-  document.getElementById("final").style.display="block";
+      <div class="summary-card">
+        <div class="summary-item">
+          <div class="summary-label">お金</div>
+          <div class="summary-value" id="r_moneyBlock"></div>
+        </div>
 
-  document.getElementById("r_money").innerText = document.getElementById("money").value + "円";
-  document.getElementById("r_ideal").innerText = document.getElementById("ideal").value;
-  document.getElementById("r_hate").innerText = document.getElementById("hate").value;
-  document.getElementById("r_solve").innerText = document.getElementById("solve").value;
-  document.getElementById("r_future").innerText = document.getElementById("future").value;
-}
-</script>
+        <div class="summary-item">
+          <div class="summary-label">理想の生活</div>
+          <div class="summary-value" id="r_ideal"></div>
+        </div>
 
+        <div class="summary-item">
+          <div class="summary-label">やりたくないこと</div>
+          <div class="summary-value" id="r_hate"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">解決のアイデア</div>
+          <div class="summary-value" id="r_solve"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">未来の状態</div>
+          <div class="summary-value" id="r_future"></div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        入力内容は保存されません。<br>
+        大切な内容なのでスクリーンショットをおすすめします。<br><br>
+        あとで見返せるように保存しておきましょう。
+        <div class="small-note">※電源ボタン＋音量ボタンで保存できます</div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">今日できる小さな一歩</h2>
+        <p class="section-desc">小さな一歩で大丈夫です。</p>
+        <input id="smallStep" type="text" placeholder="例：今週中に理想を書き足す" />
+      </div>
+
+      <div class="closing">焦らなくて大丈夫です</div>
+      <div class="closing-sub">少しずつ整えていきましょう</div>
+    </div>
+  </div>
+
+  <script>
+    function safeText(value) {
+      return value && value.trim() !== "" ? value.trim() : "未入力";
+    }
+
+    function finishWork() {
+      const money = safeText(document.getElementById("money").value);
+      const deadline = safeText(document.getElementById("deadline").value);
+      const purpose = safeText(document.getElementById("purpose").value);
+      const ideal = safeText(document.getElementById("ideal").value);
+      const hate = safeText(document.getElementById("hate").value);
+      const solve = safeText(document.getElementById("solve").value);
+      const future = safeText(document.getElementById("future").value);
+
+      document.getElementById("r_moneyBlock").innerText =
+        "必要金額： " + money + "\n" +
+        "期限： " + deadline + "\n" +
+        "目的： " + purpose;
+
+      document.getElementById("r_ideal").innerText = ideal;
+      document.getElementById("r_hate").innerText = hate;
+      document.getElementById("r_solve").innerText = solve;
+      document.getElementById("r_future").innerText = future;
+
+      document.getElementById("formArea").classList.add("hidden");
+      document.getElementById("finalArea").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
