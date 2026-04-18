@@ -412,6 +412,7 @@
 
       <div class="closing">焦らなくて大丈夫です</div>
       <div class="closing-sub">少しずつ整えていきましょう</div>
+      <button class="button" onclick="restartWork()">もう一度ワークをする</button>
     </div>
 
   </div>
@@ -426,7 +427,11 @@
       document.getElementById("workArea").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
+function restartWork() {
+  document.getElementById("finalArea").style.display = "none";
+  document.getElementById("startArea").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
     function finishWork() {
       const money = safeText(document.getElementById("money").value);
       const deadline = safeText(document.getElementById("deadline").value);
