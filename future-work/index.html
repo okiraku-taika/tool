@@ -19,25 +19,36 @@ body{
   padding:20px;
 }
 
-/* 花布上帯 */
+/* 上の花布帯 */
 .top{
   height:90px;
-  background:url("../background.jpg") center/cover;
+  background:url("background.jpg") center/cover;
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
   margin-bottom:20px;
 }
 
+/* タイトル */
 .title{
   text-align:center;
   font-size:22px;
   font-weight:bold;
-  margin:20px 0;
+  margin:20px 0 10px;
+  line-height:1.5;
 }
 
+.sub{
+  text-align:center;
+  font-size:15px;
+  line-height:1.7;
+  margin-bottom:20px;
+  color:#5a4a45;
+}
+
+/* カード */
 .card{
   background:#fff;
-  border-radius:16px;
+  border-radius:18px;
   padding:20px;
   margin-bottom:20px;
   box-shadow:0 4px 12px rgba(0,0,0,0.05);
@@ -52,15 +63,24 @@ body{
   left:0;
   width:100%;
   height:6px;
-  background:url("../background.jpg") center/cover;
+  background:url("background.jpg") center/cover;
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
 }
 
 input,textarea{
   width:100%;
-  padding:10px;
+  padding:12px;
   margin-top:10px;
-  border-radius:8px;
+  border-radius:10px;
   border:1px solid #ddd;
+  font-size:15px;
+  box-sizing:border-box;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
 }
 
 button{
@@ -70,14 +90,68 @@ button{
   border-radius:30px;
   background:#f06277;
   color:#fff;
-  font-size:16px;
+  font-size:17px;
+  font-weight:bold;
   margin-top:20px;
+  cursor:pointer;
 }
 
-.final{
+/* 画面切り替え */
+.hidden{
   display:none;
 }
 
+/* キャラ */
+.character{
+  text-align:center;
+  margin-top:20px;
+}
+
+.character img{
+  width:170px;
+  max-width:70%;
+  height:auto;
+}
+
+/* 最後のセリフ */
+.message{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.8;
+  margin-top:15px;
+  color:#7a5149;
+}
+
+.small{
+  text-align:center;
+  font-size:14px;
+  color:#6f615b;
+  margin-top:10px;
+  line-height:1.8;
+}
+
+@media(max-width:480px){
+  .container{
+    padding:16px;
+  }
+
+  .top{
+    height:75px;
+  }
+
+  .title{
+    font-size:20px;
+  }
+
+  .card{
+    padding:16px;
+  }
+
+  .character img{
+    width:145px;
+  }
+}
 </style>
 </head>
 
@@ -87,90 +161,152 @@ button{
 
 <div class="container">
 
-<div id="form">
+  <!-- 表紙 -->
+  <div id="start">
+    <div class="title">未来設計ワーク</div>
+    <div class="sub">
+      頭の中にある理想を、<br>
+      言葉にして整えていきましょう。
+    </div>
 
-<div class="title">未来設計ワーク</div>
+    <div class="card">
+      書くだけで、今の気持ちや理想が見えやすくなります。<br>
+      焦らなくて大丈夫です。<br>
+      ひとつずつ進めていきましょう。
+    </div>
 
-<div class="card">
-お金はいくら必要ですか？
-<input id="money">
-いつまで？
-<input id="time">
-何のため？
-<textarea id="purpose"></textarea>
-</div>
+    <div class="character">
+      <img src="character1.jpg" alt="スタートのキャラクター">
+    </div>
 
-<div class="card">
-理想の生活
-<textarea id="ideal"></textarea>
-</div>
+    <button onclick="startWork()">ワークを始める</button>
+  </div>
 
-<div class="card">
-やりたくないこと
-<textarea id="hate"></textarea>
-</div>
+  <!-- 入力画面 -->
+  <div id="form" class="hidden">
 
-<div class="card">
-どうする？
-<textarea id="solve"></textarea>
-</div>
+    <div class="title">未来設計ワーク</div>
 
-<div class="card">
-未来の状態
-<textarea id="future"></textarea>
-</div>
+    <div class="card">
+      <b>お金はいくら必要ですか？</b>
+      <input id="money" placeholder="例：100万円">
 
-<button onclick="finish()">完了する</button>
+      <b>いつまでに必要ですか？</b>
+      <input id="time" placeholder="例：1年後まで">
 
-</div>
+      <b>何のために必要ですか？</b>
+      <textarea id="purpose" placeholder="例：生活の安心を増やすため"></textarea>
+    </div>
 
-<!-- 最終画面 -->
-<div id="final" class="final">
+    <div class="card">
+      <b>理想の生活</b><br>
+      例）時間に余裕のある生活をしている<br>
+      例）好きなことに集中できる毎日を送っている<br>
+      例）お金に対する不安がない状態で過ごしている<br>
+      例）なぜか私はうまくいく気がする
+      <textarea id="ideal"></textarea>
+    </div>
 
-<div class="title">ここまでできたあなたはすごいです</div>
+    <div class="card">
+      <b>やりたくないこと</b><br>
+      例）掃除 / 洗濯 / 食器洗い / 食事づくり
+      <textarea id="hate"></textarea>
+    </div>
 
-<div class="card">
-お金：<span id="r_money"></span><br>
-期限：<span id="r_time"></span><br>
-目的：<span id="r_purpose"></span><br><br>
+    <div class="card">
+      <b>それならどうする？</b><br>
+      人に任せる、仕組みを変える、お金を使うなど自由に考えてください。
+      <textarea id="solve"></textarea>
+    </div>
 
-理想：<br><span id="r_ideal"></span><br><br>
-やりたくない：<br><span id="r_hate"></span><br><br>
-解決：<br><span id="r_solve"></span><br><br>
-未来：<br><span id="r_future"></span>
-</div>
+    <div class="card">
+      <b>未来の状態</b><br>
+      例）孫にお金の心配なく好きなものを買ってあげている<br>
+      例）行きたい国へお金を気にせず旅行している<br>
+      例）ジムに通い健康的な体で過ごしている
+      <textarea id="future"></textarea>
+    </div>
 
-<div class="card">
-入力内容は保存されません<br>
-スクリーンショットをおすすめします
-</div>
+    <button onclick="finish()">完了する</button>
+  </div>
 
-<div class="card">
-今日の一歩
-<input placeholder="小さな一歩を書こう">
-</div>
+  <!-- 最終画面 -->
+  <div id="final" class="hidden">
 
-<div class="title">
-焦らなくて大丈夫です<br>
-少しずつ整えていきましょう
-</div>
+    <div class="title">ここまでできたあなたはすごいです</div>
 
-</div>
+    <div class="card">
+      <b>お金</b><br>
+      必要金額：<span id="r_money"></span><br>
+      期限：<span id="r_time"></span><br>
+      目的：<span id="r_purpose"></span><br><br>
+
+      <b>理想の生活</b><br>
+      <span id="r_ideal"></span><br><br>
+
+      <b>やりたくないこと</b><br>
+      <span id="r_hate"></span><br><br>
+
+      <b>解決のアイデア</b><br>
+      <span id="r_solve"></span><br><br>
+
+      <b>未来の状態</b><br>
+      <span id="r_future"></span>
+    </div>
+
+    <div class="card">
+      入力内容は保存されません。<br>
+      大切な内容なのでスクリーンショットをおすすめします。<br><br>
+      ※電源ボタン＋音量ボタンで保存できます
+    </div>
+
+    <div class="card">
+      <b>今日できる小さな一歩</b>
+      <input placeholder="例：理想を1つ書き足す">
+    </div>
+
+    <div class="character">
+      <img src="character2.jpg" alt="完了のキャラクター">
+    </div>
+
+    <div class="message">
+      ここまでできましたね<br>
+      ここからがスタートです
+    </div>
+
+    <div class="small">
+      焦らなくて大丈夫です。<br>
+      少しずつ整えていきましょう。
+    </div>
+
+  </div>
 
 </div>
 
 <script>
-function finish(){
-document.getElementById("form").style.display="none";
-document.getElementById("final").style.display="block";
+function safeText(value){
+  return value && value.trim() !== "" ? value.trim() : "未入力";
+}
 
-document.getElementById("r_money").innerText = document.getElementById("money").value;
-document.getElementById("r_time").innerText = document.getElementById("time").value;
-document.getElementById("r_purpose").innerText = document.getElementById("purpose").value;
-document.getElementById("r_ideal").innerText = document.getElementById("ideal").value;
-document.getElementById("r_hate").innerText = document.getElementById("hate").value;
-document.getElementById("r_solve").innerText = document.getElementById("solve").value;
-document.getElementById("r_future").innerText = document.getElementById("future").value;
+function startWork(){
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("form").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function finish(){
+  document.getElementById("form").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+
+  document.getElementById("r_money").innerText = safeText(document.getElementById("money").value);
+  document.getElementById("r_time").innerText = safeText(document.getElementById("time").value);
+  document.getElementById("r_purpose").innerText = safeText(document.getElementById("purpose").value);
+  document.getElementById("r_ideal").innerText = safeText(document.getElementById("ideal").value);
+  document.getElementById("r_hate").innerText = safeText(document.getElementById("hate").value);
+  document.getElementById("r_solve").innerText = safeText(document.getElementById("solve").value);
+  document.getElementById("r_future").innerText = safeText(document.getElementById("future").value);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 </script>
 
