@@ -1,465 +1,493 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我慢した金額を見える化するツール</title>
-  <style>
-    * {
-      box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未来設計ワーク</title>
+<style>
+  *{
+    box-sizing:border-box;
+  }
+
+  body{
+    margin:0;
+    font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+    background:#f7f3f1;
+    color:#4a342e;
+    line-height:1.7;
+  }
+
+  .top-floral{
+    width:100%;
+    height:88px;
+    background:url("background.jpg") center/cover;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
+    margin-bottom:18px;
+  }
+
+  .container{
+    width:100%;
+    max-width:620px;
+    margin:0 auto;
+    padding:0 18px 40px;
+  }
+
+  .hero-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    margin:20px 0 10px;
+    color:#3f302c;
+  }
+
+  .hero-sub{
+    text-align:center;
+    font-size:15px;
+    color:#6d5a54;
+    margin:0 0 20px;
+  }
+
+  .card{
+    background:#fff;
+    border-radius:22px;
+    padding:18px;
+    box-shadow:0 8px 24px rgba(86,55,46,0.08);
+    margin-bottom:18px;
+  }
+
+  .card-floral{
+    position:relative;
+    overflow:hidden;
+  }
+
+  .card-floral::before{
+    content:"";
+    display:block;
+    height:10px;
+    margin:-18px -18px 14px;
+    background:url("background.jpg") center/cover;
+  }
+
+  .step-label{
+    display:inline-block;
+    background:#f8d9df;
+    color:#b44e69;
+    font-size:13px;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+
+  .section-title{
+    font-size:20px;
+    font-weight:700;
+    margin:0 0 8px;
+    color:#4a342e;
+  }
+
+  .section-desc{
+    font-size:14px;
+    color:#6d5a54;
+    margin:0 0 12px;
+  }
+
+  .example-box{
+    background:#fff8f9;
+    border:1px solid #f4d9df;
+    border-radius:14px;
+    padding:12px 14px;
+    font-size:13px;
+    color:#7a5f58;
+    margin:0 0 14px;
+  }
+
+  label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    margin:14px 0 6px;
+    color:#533a33;
+  }
+
+  input, textarea{
+    width:100%;
+    border:1px solid #ead8d3;
+    border-radius:14px;
+    background:#fffdfd;
+    padding:12px 14px;
+    font-size:15px;
+    color:#4a342e;
+    outline:none;
+  }
+
+  textarea{
+    min-height:100px;
+    resize:vertical;
+  }
+
+  .button{
+    appearance:none;
+    border:none;
+    width:100%;
+    background:linear-gradient(180deg,#f97f99 0%,#ef617f 100%);
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    padding:16px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(239,97,127,0.28);
+    margin-top:8px;
+  }
+
+  .character-top{
+    text-align:center;
+    margin:24px 0 10px;
+  }
+
+  .character-top img{
+    width:280px;
+    max-width:65%;
+    height:auto;
+  }
+
+  .summary-item{
+    padding:12px 0;
+    border-bottom:1px dashed #ead7d2;
+  }
+
+  .summary-item:last-child{
+    border-bottom:none;
+  }
+
+  .summary-label{
+    font-size:15px;
+    font-weight:700;
+    color:#7e4d45;
+    margin-bottom:6px;
+  }
+
+  .summary-value{
+    white-space:pre-wrap;
+    word-break:break-word;
+    font-size:15px;
+    color:#4a342e;
+  }
+
+  .note-box{
+    background:#fffaf4;
+    border:1px solid #f1e1c9;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:16px;
+    font-size:15px;
+  }
+
+  .small-note{
+    font-size:13px;
+    color:#756760;
+    margin-top:8px;
+  }
+
+  .final-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:16px;
+    margin-top:20px;
+  }
+
+  .speech{
+    display:inline-block;
+    background:#fff;
+    border:2px solid #e8c9c0;
+    border-radius:22px;
+    padding:14px 18px;
+    font-size:15px;
+    line-height:1.7;
+    color:#5a3d36;
+    max-width:240px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .final-character{
+    width:260px;
+    max-width:46%;
+    height:auto;
+  }
+
+  .closing{
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    color:#7a5149;
+    margin-top:18px;
+  }
+
+  .closing-sub{
+    text-align:center;
+    font-size:14px;
+    color:#7c6b65;
+    margin-top:8px;
+  }
+
+  #workArea,
+  #finalArea{
+    display:none;
+  }
+
+  @media (max-width:480px){
+    .container{
+      padding:0 14px 32px;
     }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      background-image: url("background.jpg");
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-      color: #1e293b;
-      padding: 14px;
+    .hero-title{
+      font-size:24px;
     }
 
-    .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      display: grid;
-      gap: 14px;
+    .card{
+      padding:16px;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid #f1f5f9;
-      border-radius: 22px;
-      padding: 16px;
-      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+    .card-floral::before{
+      margin:-16px -16px 12px;
     }
 
-    .hero-title {
-      font-size: 27px;
-      line-height: 1.45;
-      font-weight: 800;
-      margin: 0;
+    .character-top img{
+      width:240px;
+      max-width:72%;
     }
 
-    .hero-sub {
-      margin-top: 10px;
-      font-size: 14px;
-      line-height: 1.8;
-      color: #475569;
+    .final-row{
+      gap:10px;
     }
 
-    .label {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 6px;
+    .speech{
+      font-size:13px;
+      padding:12px 14px;
+      max-width:190px;
     }
 
-    .amount-xl {
-      font-size: 34px;
-      font-weight: 800;
-      line-height: 1.2;
+    .final-character{
+      max-width:42%;
     }
-
-    .amount-lg {
-      font-size: 25px;
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 0 0 14px;
-    }
-
-    .field {
-      display: grid;
-      gap: 12px;
-    }
-
-    select,
-    input,
-    textarea {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid #dbeafe;
-      background: #fff;
-      font-size: 16px;
-      font-family: inherit;
-      padding: 12px 14px;
-      outline: none;
-    }
-
-    select,
-    input {
-      height: 48px;
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .main-btn {
-      width: 100%;
-      height: 50px;
-      border: none;
-      border-radius: 18px;
-      background: #e11d48;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .main-btn:hover {
-      opacity: 0.95;
-    }
-
-    .note {
-      background: #fff1f2;
-      border-radius: 18px;
-      padding: 12px;
-      font-size: 14px;
-      line-height: 1.8;
-      color: #475569;
-    }
-
-    .month-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .month-box {
-      background: #f8fafc;
-      border: 1px solid #f1f5f9;
-      border-radius: 18px;
-      padding: 12px;
-    }
-
-    .entry-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .entry {
-      background: #f8fafc;
-      border: 1px solid #f1f5f9;
-      border-radius: 18px;
-      padding: 14px;
-    }
-
-    .entry-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .entry-month {
-      font-size: 13px;
-      color: #64748b;
-    }
-
-    .entry-item {
-      margin-top: 4px;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.6;
-      word-break: break-word;
-    }
-
-    .entry-amount {
-      margin-top: 8px;
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .entry-memo {
-      margin-top: 8px;
-      font-size: 13px;
-      line-height: 1.7;
-      color: #475569;
-      white-space: pre-wrap;
-    }
-
-    .delete-btn {
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 999px;
-      background: #fee2e2;
-      color: #b91c1c;
-      font-size: 20px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .empty {
-      border: 1px dashed #cbd5e1;
-      border-radius: 18px;
-      padding: 16px;
-      font-size: 14px;
-      color: #64748b;
-      background: #fff;
-    }
-
-    @media (max-width: 520px) {
-      .hero-title {
-        font-size: 24px;
-      }
-
-      .amount-xl {
-        font-size: 30px;
-      }
-
-      .amount-lg {
-        font-size: 22px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <h1 class="hero-title">気づいたらお金が残る人になる<br>我慢した金額を見える化するツール</h1>
-      <div class="hero-sub">
-        買わなかったものを記録して、今月どれだけ無駄な出費を抑えられたかを見える化します。
-        我慢できた金額を確認したら、その分を別口座へ移す意識づけにも使えます。
+  <div class="top-floral"></div>
+
+  <div class="container">
+
+    <!-- 表紙 -->
+    <div id="startArea">
+      <h1 class="hero-title">未来設計ワーク</h1>
+      <p class="hero-sub">
+        頭の中にある理想を、<br>
+        言葉にして整えていきましょう。
+      </p>
+
+      <div class="card card-floral">
+        書くだけで、今の気持ちや理想が見えやすくなります。<br>
+        焦らなくて大丈夫です。<br>
+        ひとつずつ進めていきましょう。
       </div>
+
+      <div class="character-top">
+        <img src="character1.jpg" alt="スタートのキャラクター">
+      </div>
+
+      <button class="button" onclick="startWork()">ワークを始める</button>
     </div>
 
-    <div class="card">
-      <div class="label">今月の我慢合計</div>
-      <div class="amount-xl" id="currentMonthTotal">¥15,000</div>
-      <div class="hero-sub" id="currentMonthText" style="margin-top:8px; font-size:13px;">
-        4月に我慢できた合計金額です。
-      </div>
-    </div>
+    <!-- 入力画面 -->
+    <div id="workArea">
+      <h1 class="hero-title">未来設計ワーク</h1>
+      <p class="hero-sub">
+        ひとつずつ書いて、気持ちを整えていきましょう。
+      </p>
 
-    <div class="grid-2">
+      <div class="card card-floral">
+        <div class="step-label">STEP 1</div>
+        <h2 class="section-title">お金の整理</h2>
+        <p class="section-desc">まずは、お金のことを具体的にします。</p>
+
+        <label for="money">自分にはいくら必要ですか？</label>
+        <input id="money" type="text" placeholder="例：100万円">
+
+        <label for="deadline">いつまでに必要ですか？</label>
+        <input id="deadline" type="text" placeholder="例：1年後まで">
+
+        <label for="purpose">なんのために必要ですか？</label>
+        <textarea id="purpose" placeholder="例：生活を整えるため"></textarea>
+      </div>
+
       <div class="card">
-        <div class="label">これまでの合計（別口座へ）</div>
-        <div class="amount-lg" id="totalSaved">¥15,000</div>
+        <div class="step-label">STEP 2</div>
+        <h2 class="section-title">理想の生活</h2>
+        <p class="section-desc">今の現実は考えず、理想をそのまま書いてください。</p>
+        <div class="example-box">
+          ・時間に余裕のある生活をしている<br>
+          ・好きなことに集中できる毎日を送っている<br>
+          ・お金に対する不安がない状態で過ごしている<br>
+          ・なぜか私はうまくいく気がする
+        </div>
+        <textarea id="ideal" placeholder="ここに書いてください"></textarea>
       </div>
+
       <div class="card">
-        <div class="label">1年の目安</div>
-        <div class="amount-lg" id="annualProjection">¥180,000</div>
+        <div class="step-label">STEP 3</div>
+        <h2 class="section-title">やりたくないこと</h2>
+        <p class="section-desc">まずは、やりたくないことだけを書いてください。</p>
+        <div class="example-box">
+          ・掃除<br>
+          ・洗濯<br>
+          ・食器洗い<br>
+          ・食事づくり
+        </div>
+        <textarea id="hate" placeholder="ここに書いてください"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="step-label">STEP 4</div>
+        <h2 class="section-title">解決のアイデア</h2>
+        <p class="section-desc">それならどうするか、自分の答えを書いてみましょう。</p>
+        <div class="example-box">
+          ・仕組みを変える<br>
+          ・人に任せる<br>
+          ・回数を減らす<br>
+          ・お金を使う方法も含めて自由に考える
+        </div>
+        <textarea id="solve" placeholder="ここに書いてください"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="step-label">STEP 5</div>
+        <h2 class="section-title">未来の状態</h2>
+        <p class="section-desc">数年後やその先に、こうなっていたい状態を書いてください。</p>
+        <div class="example-box">
+          ・孫にお金の心配なく好きなものを買ってあげている<br>
+          ・行きたい国へお金を気にせず旅行している<br>
+          ・ジムに通い健康的な体で過ごしている
+        </div>
+        <textarea id="future" placeholder="ここに書いてください"></textarea>
+      </div>
+
+      <button class="button" onclick="finishWork()">完了する</button>
+    </div>
+
+    <!-- 最終画面 -->
+    <div id="finalArea">
+      <p id="todayDate" style="text-align:center; color:#888; font-size:14px;"></p>
+
+      <h1 class="hero-title">ここまでできたあなたはすごいです</h1>
+      <p class="hero-sub">入力した内容を見返しやすくまとめました。</p>
+
+      <div class="card card-floral">
+        <div class="summary-item">
+          <div class="summary-label">お金</div>
+          <div class="summary-value" id="r_moneyBlock"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">理想の生活</div>
+          <div class="summary-value" id="r_ideal"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">やりたくないこと</div>
+          <div class="summary-value" id="r_hate"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">解決のアイデア</div>
+          <div class="summary-value" id="r_solve"></div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">未来の状態</div>
+          <div class="summary-value" id="r_future"></div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        入力内容は保存されません。<br>
+        大切な内容なのでスクリーンショットをおすすめします。<br><br>
+        あとで見返せるように保存しておきましょう。
+        <div class="small-note">※電源ボタン＋音量ボタンで保存できます</div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">今日できる小さな一歩</h2>
+        <p class="section-desc">小さな一歩で大丈夫です。</p>
+        <input id="smallStep" type="text" placeholder="例：理想を1つ書き足す">
+      </div>
+
+      <div class="final-row">
+        <div class="speech">
+          ここまでできましたね<br>
+          ここからがスタートです
+        </div>
+
+        <img src="character2.jpg" class="final-character" alt="完了後のキャラクター">
+      </div>
+
+      <div class="closing">焦らなくて大丈夫です</div>
+      <div class="closing-sub">少しずつ整えていきましょう</div>
+
+      <div style="margin-top:16px;">
+        <button class="button" onclick="restartWork()">もう一度ワークをする</button>
       </div>
     </div>
 
-    <div class="card">
-      <h2 class="section-title">記録を追加</h2>
-      <div class="field">
-        <div>
-          <div class="label">月</div>
-          <select id="monthSelect"></select>
-        </div>
-
-        <div>
-          <div class="label">我慢したもの</div>
-          <input id="itemInput" type="text" placeholder="例：バッグを我慢">
-        </div>
-
-        <div>
-          <div class="label">金額</div>
-          <input id="amountInput" type="number" placeholder="例：8000">
-        </div>
-
-        <div>
-          <div class="label">メモ</div>
-          <textarea id="memoInput" placeholder="なぜ我慢できたか、気づいたことなど"></textarea>
-        </div>
-
-        <button class="main-btn" id="addButton">記録する</button>
-
-        <div class="note">
-          例：4月にスカート10,000円、靴5,000円を我慢したら、
-          4月の合計は15,000円として表示されます。
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2 class="section-title">月別の合計</h2>
-      <div class="month-grid" id="monthlyTotals"></div>
-    </div>
-
-    <div class="card">
-      <h2 class="section-title">記録一覧</h2>
-      <div class="entry-list" id="entriesList"></div>
-    </div>
   </div>
 
   <script>
-    const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
-
-    let entries = [
-      { id: 1, month: "4月", item: "スカートを我慢", amount: 10000, memo: "" },
-      { id: 2, month: "4月", item: "靴を我慢", amount: 5000, memo: "" }
-    ];
-
-    const monthSelect = document.getElementById("monthSelect");
-    const itemInput = document.getElementById("itemInput");
-    const amountInput = document.getElementById("amountInput");
-    const memoInput = document.getElementById("memoInput");
-    const addButton = document.getElementById("addButton");
-
-    const currentMonthTotal = document.getElementById("currentMonthTotal");
-    const currentMonthText = document.getElementById("currentMonthText");
-    const totalSaved = document.getElementById("totalSaved");
-    const annualProjection = document.getElementById("annualProjection");
-    const monthlyTotals = document.getElementById("monthlyTotals");
-    const entriesList = document.getElementById("entriesList");
-
-    function yen(value) {
-      return "¥" + Number(value).toLocaleString("ja-JP");
+    function safeText(value) {
+      return value && value.trim() !== "" ? value.trim() : "未入力";
     }
 
-    function setupMonths() {
-      monthSelect.innerHTML = "";
-      months.forEach((month) => {
-        const option = document.createElement("option");
-        option.value = month;
-        option.textContent = month;
-        if (month === "4月") option.selected = true;
-        monthSelect.appendChild(option);
-      });
+    function startWork() {
+      document.getElementById("startArea").style.display = "none";
+      document.getElementById("workArea").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function getCurrentMonthTotal(selectedMonth) {
-      return entries
-        .filter((entry) => entry.month === selectedMonth)
-        .reduce((sum, entry) => sum + entry.amount, 0);
+    function finishWork() {
+      const money = safeText(document.getElementById("money").value);
+      const deadline = safeText(document.getElementById("deadline").value);
+      const purpose = safeText(document.getElementById("purpose").value);
+      const ideal = safeText(document.getElementById("ideal").value);
+      const hate = safeText(document.getElementById("hate").value);
+      const solve = safeText(document.getElementById("solve").value);
+      const future = safeText(document.getElementById("future").value);
+
+      document.getElementById("r_moneyBlock").innerText =
+        "必要金額： " + money + "\n" +
+        "期限： " + deadline + "\n" +
+        "目的： " + purpose;
+
+      document.getElementById("r_ideal").innerText = ideal;
+      document.getElementById("r_hate").innerText = hate;
+      document.getElementById("r_solve").innerText = solve;
+      document.getElementById("r_future").innerText = future;
+
+      const today = new Date();
+      document.getElementById("todayDate").innerText =
+        today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
+
+      document.getElementById("workArea").style.display = "none";
+      document.getElementById("finalArea").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function getTotalSaved() {
-      return entries.reduce((sum, entry) => sum + entry.amount, 0);
+    function restartWork() {
+      document.getElementById("finalArea").style.display = "none";
+      document.getElementById("startArea").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    function getAnnualProjection() {
-      const total = getTotalSaved();
-      const usedMonths = new Set(entries.map((entry) => entry.month)).size || 1;
-      return Math.round((total * 12) / usedMonths);
-    }
-
-    function renderMonthlyTotals() {
-      monthlyTotals.innerHTML = "";
-      months.forEach((month) => {
-        const total = entries
-          .filter((entry) => entry.month === month)
-          .reduce((sum, entry) => sum + entry.amount, 0);
-
-        const box = document.createElement("div");
-        box.className = "month-box";
-        box.innerHTML = `
-          <div class="label">${month}</div>
-          <div style="margin-top:4px; font-size:20px; font-weight:800;">${yen(total)}</div>
-        `;
-        monthlyTotals.appendChild(box);
-      });
-    }
-
-    function renderEntries() {
-      entriesList.innerHTML = "";
-
-      if (entries.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        empty.textContent = "まだ記録がありません。";
-        entriesList.appendChild(empty);
-        return;
-      }
-
-      entries.forEach((entry) => {
-        const div = document.createElement("div");
-        div.className = "entry";
-
-        div.innerHTML = `
-          <div class="entry-row">
-            <div style="flex:1; min-width:0;">
-              <div class="entry-month">${entry.month}</div>
-              <div class="entry-item">${escapeHtml(entry.item)}</div>
-              <div class="entry-amount">${yen(entry.amount)}</div>
-              ${entry.memo ? `<div class="entry-memo">${escapeHtml(entry.memo)}</div>` : ""}
-            </div>
-            <button class="delete-btn" data-id="${entry.id}" type="button">×</button>
-          </div>
-        `;
-
-        entriesList.appendChild(div);
-      });
-
-      document.querySelectorAll(".delete-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const id = Number(btn.getAttribute("data-id"));
-          entries = entries.filter((entry) => entry.id !== id);
-          render();
-        });
-      });
-    }
-
-    function escapeHtml(text) {
-      return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;")
-        .replaceAll("\n", "<br>");
-    }
-
-    function render() {
-      const selectedMonth = monthSelect.value;
-      currentMonthTotal.textContent = yen(getCurrentMonthTotal(selectedMonth));
-      currentMonthText.textContent = selectedMonth + "に我慢できた合計金額です。";
-      totalSaved.textContent = yen(getTotalSaved());
-      annualProjection.textContent = yen(getAnnualProjection());
-
-      renderMonthlyTotals();
-      renderEntries();
-    }
-
-    addButton.addEventListener("click", () => {
-      const month = monthSelect.value;
-      const item = itemInput.value.trim();
-      const amount = Number(amountInput.value);
-      const memo = memoInput.value.trim();
-
-      if (!item || !amount || amount <= 0) return;
-
-      entries.unshift({
-        id: Date.now(),
-        month: month,
-        item: item,
-        amount: amount,
-        memo: memo
-      });
-
-      itemInput.value = "";
-      amountInput.value = "";
-      memoInput.value = "";
-
-      render();
-    });
-
-    monthSelect.addEventListener("change", render);
-
-    setupMonths();
-    render();
   </script>
 </body>
 </html>
