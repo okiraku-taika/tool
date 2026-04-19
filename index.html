@@ -37,6 +37,7 @@ body{
   text-align:center;
   color:#777;
   margin-bottom:20px;
+  line-height:1.8;
 }
 
 .card{
@@ -45,6 +46,7 @@ body{
   padding:18px;
   margin-bottom:20px;
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  line-height:1.8;
 }
 
 button{
@@ -57,6 +59,7 @@ button{
   font-size:18px;
   font-weight:bold;
   margin-top:20px;
+  cursor:pointer;
 }
 
 input,textarea{
@@ -66,6 +69,52 @@ input,textarea{
   border-radius:10px;
   border:1px solid #ddd;
   font-size:14px;
+  box-sizing:border-box;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.result-block{
+  margin-bottom:16px;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.final-wrap{
+  text-align:center;
+  margin-top:20px;
+}
+
+.speech{
+  background:#fff;
+  padding:12px;
+  border-radius:15px;
+  display:inline-block;
+  margin-bottom:12px;
+  line-height:1.8;
+}
+
+.final-character{
+  width:200px;
+  display:block;
+  margin:10px auto;
+}
+
+@media (max-width: 480px){
+  .container{
+    padding:16px;
+  }
+
+  .title{
+    font-size:24px;
+  }
+
+  .final-character{
+    width:180px;
+  }
 }
 </style>
 </head>
@@ -76,157 +125,163 @@ input,textarea{
 
 <div class="container">
 
-<!-- 表紙 -->
-<div id="startArea">
+  <!-- 表紙 -->
+  <div id="startArea">
 
-<div class="title">未来設計ワーク</div>
+    <div class="title">未来設計ワーク</div>
 
-<div class="sub">
-頭の中にある理想を<br>
-言葉にして整えていきましょう
-</div>
+    <div class="sub">
+      頭の中にある理想を<br>
+      言葉にして整えていきましょう
+    </div>
 
-<div class="card">
-書くだけで、今の気持ちや理想が見えやすくなります。<br>
-焦らなくて大丈夫です。<br>
-ひとつずつ進めていきましょう。
-</div>
+    <div class="card">
+      書くだけで、今の気持ちや理想が見えやすくなります。<br>
+      焦らなくて大丈夫です。<br>
+      ひとつずつ進めていきましょう。
+    </div>
 
-<div style="text-align:center; margin:24px 0 10px;">
-  <img src="character4.png" style="width:260px; display:block; margin:20px auto;">
-</div>
+    <div style="text-align:center; margin:24px 0 10px;">
+      <img src="character4.png" alt="表紙キャラクター" style="width:260px; display:block; margin:20px auto;">
+    </div>
 
-<button onclick="startWork()">ワークを始める</button>
+    <button onclick="startWork()">ワークを始める</button>
 
-</div>
+  </div>
 
-<!-- 入力 -->
-<div id="workArea" style="display:none;">
+  <!-- 入力 -->
+  <div id="workArea" style="display:none;">
 
-<div class="card">
-お金
-<input id="money" placeholder="例：100万円">
+    <div class="card">
+      お金<br>
+      <input id="money" placeholder="例：100万円">
 
-期限
-<input id="deadline" placeholder="例：1年後">
+      期限<br>
+      <input id="deadline" placeholder="例：1年後">
 
-目的
-<textarea id="purpose" placeholder="例：生活を整えるため・自由な時間を増やすため"></textarea>
-</div>
+      目的<br>
+      <textarea id="purpose" placeholder="例：生活を整えるため・自由な時間を増やすため"></textarea>
+    </div>
 
-<div class="card">
-理想の生活
-<textarea id="ideal">・時間に余裕のある生活をしている
+    <div class="card">
+      理想の生活
+      <textarea id="ideal">・時間に余裕のある生活をしている
 ・好きなことに集中できる毎日を送っている
 ・お金に対する不安がない状態で過ごしている
 ・なぜか私はうまくいく気がする</textarea>
-</div>
+    </div>
 
-<div class="card">
-やりたくないこと
-<textarea id="hate">・掃除
+    <div class="card">
+      やりたくないこと
+      <textarea id="hate">・掃除
 ・洗濯
 ・食器洗い
 ・食事づくり</textarea>
-</div>
+    </div>
 
-<div class="card">
-解決方法
-<textarea id="solve">・やり方を変える
+    <div class="card">
+      解決方法
+      <textarea id="solve">・やり方を変える
 ・人に任せる
 ・回数を減らす
 ・お金を使う方法も考える</textarea>
-</div>
+    </div>
 
-<div class="card">
-未来
-<textarea id="future">・子供にお金の心配なく好きなものを買ってあげている
+    <div class="card">
+      未来
+      <textarea id="future">・子供にお金の心配なく好きなものを買ってあげている
 ・行きたい国へお金を気にせず旅行している
 ・ジムに通い健康的な体で過ごしている</textarea>
-</div>
+    </div>
 
-<button onclick="finishWork()">完了する</button>
+    <button onclick="finishWork()">完了する</button>
 
-</div>
-
-<!-- 最後 -->
-<div id="finalArea" style="display:none;">
-
-<p id="todayDate" style="text-align:center;color:#999;"></p>
-
-<div class="card">
-
-<div id="r_moneyBlock"></div>
-<div id="r_ideal"></div>
-<div id="r_hate"></div>
-<div id="r_solve"></div>
-<div id="r_future"></div>
-
-</div>
-
-<div class="card">
-入力内容は保存されません<br>
-スクリーンショットをおすすめします
-</div>
-
-<div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px;">
-
-<div style="text-align:center; margin-top:20px;">
-
-  <div style="background:#fff; padding:12px; border-radius:15px; display:inline-block; margin-bottom:12px;">
-    ここまでできましたね<br>
-    ここからがスタートです
   </div>
 
-  <img src="character5.png" style="width:200px; display:block; margin:10px auto;">
+  <!-- 最後 -->
+  <div id="finalArea" style="display:none;">
 
-</div>
+    <p id="todayDate" style="text-align:center;color:#999;"></p>
 
-<button onclick="restartWork()">もう一度ワークをする</button>
+    <div class="card">
+      <div id="r_moneyBlock" class="result-block"></div>
+      <div id="r_ideal" class="result-block"></div>
+      <div id="r_hate" class="result-block"></div>
+      <div id="r_solve" class="result-block"></div>
+      <div id="r_future" class="result-block"></div>
+    </div>
 
-</div>
+    <div class="card">
+      入力内容は保存されません<br>
+      スクリーンショットをおすすめします
+    </div>
+
+    <div class="final-wrap">
+      <div class="speech">
+        ここまでできましたね<br>
+        ここからがスタートです
+      </div>
+
+      <img src="character5.png" alt="完了後キャラクター" class="final-character">
+    </div>
+
+    <button onclick="restartWork()">もう一度ワークをする</button>
+
+  </div>
 
 </div>
 
 <script>
-
 function startWork(){
-document.getElementById("startArea").style.display="none";
-document.getElementById("workArea").style.display="block";
+  document.getElementById("startArea").style.display = "none";
+  document.getElementById("workArea").style.display = "block";
+  document.getElementById("finalArea").style.display = "none";
+  window.scrollTo(0, 0);
+}
+
+function safeText(value){
+  if(!value || value.trim() === ""){
+    return "未入力";
+  }
+  return value.trim();
 }
 
 function finishWork(){
+  const money = safeText(document.getElementById("money").value);
+  const deadline = safeText(document.getElementById("deadline").value);
+  const purpose = safeText(document.getElementById("purpose").value);
+  const ideal = safeText(document.getElementById("ideal").value);
+  const hate = safeText(document.getElementById("hate").value);
+  const solve = safeText(document.getElementById("solve").value);
+  const future = safeText(document.getElementById("future").value);
 
-const money=document.getElementById("money").value;
-const deadline=document.getElementById("deadline").value;
-const purpose=document.getElementById("purpose").value;
-const ideal=document.getElementById("ideal").value;
-const hate=document.getElementById("hate").value;
-const solve=document.getElementById("solve").value;
-const future=document.getElementById("future").value;
+  document.getElementById("r_moneyBlock").innerText =
+    "必要金額：" + money + "\n" +
+    "期限：" + deadline + "\n" +
+    "目的：" + purpose;
 
-document.getElementById("r_moneyBlock").innerText=
-"必要金額："+money+"\n期限："+deadline+"\n目的："+purpose;
+  document.getElementById("r_ideal").innerText = "理想の生活\n" + ideal;
+  document.getElementById("r_hate").innerText = "やりたくないこと\n" + hate;
+  document.getElementById("r_solve").innerText = "解決方法\n" + solve;
+  document.getElementById("r_future").innerText = "未来\n" + future;
 
-document.getElementById("r_ideal").innerText=ideal;
-document.getElementById("r_hate").innerText=hate;
-document.getElementById("r_solve").innerText=solve;
-document.getElementById("r_future").innerText=future;
+  document.getElementById("workArea").style.display = "none";
+  document.getElementById("startArea").style.display = "none";
+  document.getElementById("finalArea").style.display = "block";
 
-document.getElementById("workArea").style.display="none";
-document.getElementById("finalArea").style.display="block";
+  const today = new Date();
+  document.getElementById("todayDate").innerText =
+    today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 
-const today=new Date();
-document.getElementById("todayDate").innerText=
-today.getFullYear()+"年"+(today.getMonth()+1)+"月"+today.getDate()+"日";
-
+  window.scrollTo(0, 0);
 }
 
 function restartWork(){
-document.getElementById("finalArea").style.display="none";
-document.getElementById("startArea").style.display="block";
+  document.getElementById("finalArea").style.display = "none";
+  document.getElementById("workArea").style.display = "none";
+  document.getElementById("startArea").style.display = "block";
+  window.scrollTo(0, 0);
 }
-
 </script>
 
 </body>
