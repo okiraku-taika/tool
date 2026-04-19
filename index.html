@@ -49,6 +49,23 @@ body{
   line-height:1.8;
 }
 
+.label{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.example{
+  background:#fff6f8;
+  padding:12px;
+  border-radius:12px;
+  font-size:13px;
+  color:#777;
+  margin-top:10px;
+  margin-bottom:12px;
+  line-height:1.8;
+}
+
 button{
   width:100%;
   padding:16px;
@@ -60,27 +77,46 @@ button{
   font-weight:bold;
   margin-top:20px;
   cursor:pointer;
+  box-shadow:0 6px 14px rgba(245,108,134,0.25);
 }
 
 input,textarea{
   width:100%;
-  padding:10px;
+  padding:12px;
   margin-top:10px;
-  border-radius:10px;
+  border-radius:12px;
   border:1px solid #ddd;
   font-size:14px;
   box-sizing:border-box;
+  background:#fff;
+  color:#4a342e;
+}
+
+input{
+  min-height:46px;
 }
 
 textarea{
-  min-height:120px;
+  min-height:130px;
   resize:vertical;
+  line-height:1.7;
+}
+
+::placeholder{
+  color:#aaa;
 }
 
 .result-block{
-  margin-bottom:16px;
+  margin-bottom:18px;
   white-space:pre-wrap;
   word-break:break-word;
+  line-height:1.8;
+}
+
+.result-head{
+  font-weight:bold;
+  margin-bottom:6px;
+  color:#d95c7b;
 }
 
 .final-wrap{
@@ -90,17 +126,32 @@ textarea{
 
 .speech{
   background:#fff;
-  padding:12px;
+  padding:12px 16px;
   border-radius:15px;
   display:inline-block;
   margin-bottom:12px;
   line-height:1.8;
+  box-shadow:0 4px 10px rgba(0,0,0,0.04);
 }
 
 .final-character{
   width:200px;
   display:block;
   margin:10px auto;
+}
+
+.start-character{
+  width:260px;
+  display:block;
+  margin:20px auto;
+}
+
+.note{
+  font-size:13px;
+  color:#888;
+  text-align:center;
+  margin-top:10px;
+  line-height:1.7;
 }
 
 @media (max-width: 480px){
@@ -112,8 +163,25 @@ textarea{
     font-size:24px;
   }
 
+  .card{
+    padding:16px;
+  }
+
+  .label{
+    font-size:17px;
+  }
+
+  textarea{
+    min-height:120px;
+  }
+
   .final-character{
     width:180px;
+  }
+
+  .start-character{
+    width:240px;
+    max-width:80%;
   }
 }
 </style>
@@ -142,10 +210,11 @@ textarea{
     </div>
 
     <div style="text-align:center; margin:24px 0 10px;">
-      <img src="./character4.png" alt="表紙キャラクター" style="width:260px; display:block; margin:20px auto;">
+      <img src="./character4.png" alt="表紙キャラクター" class="start-character">
     </div>
 
     <button onclick="startWork()">ワークを始める</button>
+    <div class="note">入力内容は端末に保存されません</div>
 
   </div>
 
@@ -153,49 +222,71 @@ textarea{
   <div id="workArea" style="display:none;">
 
     <div class="card">
-      お金<br>
+      <div class="label">お金</div>
+
+      自分にはいくら必要ですか？
       <input id="money" placeholder="例：100万円">
 
-      期限<br>
+      いつまでに必要ですか？
       <input id="deadline" placeholder="例：1年後">
 
-      目的<br>
-      <textarea id="purpose" placeholder="例：生活を整えるため・自由な時間を増やすため"></textarea>
+      何のために必要ですか？
+      <textarea id="purpose" placeholder="ここに書いてください"></textarea>
     </div>
 
     <div class="card">
-      理想の生活
-    <textarea id="ideal" placeholder="例：
-・時間に余裕のある生活をしている
-・好きなことに集中できる毎日を送っている
-・お金に対する不安がない状態で過ごしている
-・なぜか私はうまくいく気がする"></textarea>
+      <div class="label">理想の生活</div>
+
+      <div class="example">
+        【例】<br>
+        ・時間に余裕のある生活をしている<br>
+        ・好きなことに集中できる毎日を送っている<br>
+        ・お金に対する不安がない状態で過ごしている<br>
+        ・なぜか私はうまくいく気がする
+      </div>
+
+      <textarea id="ideal" placeholder="ここに書いてください"></textarea>
     </div>
 
     <div class="card">
-      やりたくないこと
-     <textarea id="hate" placeholder="例：
-・掃除
-・洗濯
-・食器洗い
-・食事づくり"></textarea>
+      <div class="label">やりたくないこと</div>
+
+      <div class="example">
+        【例】<br>
+        ・掃除<br>
+        ・洗濯<br>
+        ・食器洗い<br>
+        ・食事づくり
+      </div>
+
+      <textarea id="hate" placeholder="ここに書いてください"></textarea>
     </div>
 
     <div class="card">
-      解決方法
-    <textarea id="solve" placeholder="例：
-・やり方を変える
-・人に任せる
-・回数を減らす
-・お金を使う方法も考える"></textarea>
+      <div class="label">解決方法</div>
+
+      <div class="example">
+        【例】<br>
+        ・やり方を変える<br>
+        ・人に任せる<br>
+        ・回数を減らす<br>
+        ・お金を使う方法も考える
+      </div>
+
+      <textarea id="solve" placeholder="ここに書いてください"></textarea>
     </div>
 
     <div class="card">
-      未来
-     <textarea id="future" placeholder="例：
-・子供にお金の心配なく好きなものを買ってあげている
-・行きたい国へお金を気にせず旅行している
-・ジムに通い健康的な体で過ごしている"></textarea>
+      <div class="label">未来</div>
+
+      <div class="example">
+        【例】<br>
+        ・子供にお金の心配なく好きなものを買ってあげている<br>
+        ・行きたい国へお金を気にせず旅行している<br>
+        ・ジムに通い健康的な体で過ごしている
+      </div>
+
+      <textarea id="future" placeholder="ここに書いてください"></textarea>
     </div>
 
     <button onclick="finishWork()">完了する</button>
@@ -208,11 +299,30 @@ textarea{
     <p id="todayDate" style="text-align:center;color:#999;"></p>
 
     <div class="card">
-      <div id="r_moneyBlock" class="result-block"></div>
-      <div id="r_ideal" class="result-block"></div>
-      <div id="r_hate" class="result-block"></div>
-      <div id="r_solve" class="result-block"></div>
-      <div id="r_future" class="result-block"></div>
+      <div class="result-block">
+        <div class="result-head">お金</div>
+        <div id="r_moneyBlock"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-head">理想の生活</div>
+        <div id="r_ideal"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-head">やりたくないこと</div>
+        <div id="r_hate"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-head">解決方法</div>
+        <div id="r_solve"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-head">未来</div>
+        <div id="r_future"></div>
+      </div>
     </div>
 
     <div class="card">
@@ -226,7 +336,7 @@ textarea{
         ここからがスタートです
       </div>
 
-      <img src="character5.png" alt="完了後キャラクター" class="final-character">
+      <img src="./character5.png" alt="完了後キャラクター" class="final-character">
     </div>
 
     <button onclick="restartWork()">もう一度ワークをする</button>
@@ -264,10 +374,10 @@ function finishWork(){
     "期限：" + deadline + "\n" +
     "目的：" + purpose;
 
-  document.getElementById("r_ideal").innerText = "理想の生活\n" + ideal;
-  document.getElementById("r_hate").innerText = "やりたくないこと\n" + hate;
-  document.getElementById("r_solve").innerText = "解決方法\n" + solve;
-  document.getElementById("r_future").innerText = "未来\n" + future;
+  document.getElementById("r_ideal").innerText = ideal;
+  document.getElementById("r_hate").innerText = hate;
+  document.getElementById("r_solve").innerText = solve;
+  document.getElementById("r_future").innerText = future;
 
   document.getElementById("workArea").style.display = "none";
   document.getElementById("startArea").style.display = "none";
