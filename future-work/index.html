@@ -12,423 +12,861 @@
     body {
       margin: 0;
       font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-      background: #f9f5f2;
+      background: #f6f1ef;
       color: #4a342e;
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
     .top-floral {
-      width: 100%;
-      height: 88px;
-      background: url("background.jpg") center/cover;
-      border-bottom-left-radius: 28px;
-      border-bottom-right-radius: 28px;
-      margin-bottom: 18px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 620px;
-      margin: 0 auto;
-      padding: 0 18px 40px;
-    }
-
-    .hero-title {
-      text-align: center;
-      font-size: 27px;
-      line-height: 1.45;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin: 0;
-      color: #3f302c;
-    }
-
-    .hero-sub {
-      margin-top: 10px;
-      font-size: 16px;
-      line-height: 1.8;
-      color: #475569;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 26px;
-      padding: 18px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-      margin-bottom: 18px;
-    }
-
-    .card-floral {
+      height: 140px;
+      background: url("background.jpg") center/cover no-repeat;
+      border-bottom-left-radius: 80px;
+      border-bottom-right-radius: 80px;
       position: relative;
       overflow: hidden;
     }
 
-    .card-floral::before {
+    .top-floral::after {
       content: "";
-      display: block;
-      height: 10px;
-      margin: -18px -18px 14px;
-      background: url("background.jpg") center/cover;
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #f6f1ef;
+      border-top-left-radius: 100px;
+      border-top-right-radius: 100px;
     }
 
-    .step-label {
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px 20px 56px;
+    }
+
+    .landing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
       display: inline-block;
-      background: #f8d9df;
-      color: #b44e69;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0 0 8px;
-      color: #4a342e;
-    }
-
-    .section-desc {
-      font-size: 14px;
-      color: #6d5a54;
-      margin: 0 0 12px;
-    }
-
-    .example-box {
-      background: #fff8f9;
-      border: 1px solid #f4d9df;
-      border-radius: 16px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: #7a5f58;
-      margin: 0 0 14px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin: 14px 0 6px;
-      color: #533a33;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid #ead8d3;
-      border-radius: 14px;
-      background: #fffdfd;
-      padding: 12px 14px;
-      font-size: 15px;
-      color: #4a342e;
-      outline: none;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .button {
-      appearance: none;
-      border: none;
-      width: 100%;
-      background: linear-gradient(180deg, #ff8aa5 0%, #f06277 100%);
+      background: #f26f91;
       color: #fff;
+      padding: 10px 22px;
+      border-radius: 18px;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 10px rgba(242, 111, 145, 0.18);
+    }
+
+    .hero-title {
+      font-size: 86px;
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin: 0;
+      color: #4a2d1f;
+    }
+
+    .hero-title .accent {
+      display: block;
+      color: #f05f8c;
+      font-size: 72px;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    .lead {
+      margin-top: 22px;
+      font-size: 24px;
+      line-height: 1.85;
+      color: #4e372f;
+      font-weight: 600;
+      max-width: 560px;
+    }
+
+    .feature-list {
+      margin-top: 28px;
+      display: grid;
+      gap: 14px;
+      max-width: 560px;
+    }
+
+    .feature {
+      background: #fff7f5;
+      border: 2px solid #f1d2c5;
+      border-radius: 26px;
       padding: 18px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 10px 22px rgba(240, 98, 119, 0.35);
-      margin-top: 16px;
-      transition: all 0.2s ease;
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      align-items: center;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
     }
 
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(240, 98, 119, 0.4);
-    }
-
-    .button:active {
-      transform: translateY(1px);
-      box-shadow: 0 6px 14px rgba(240, 98, 119, 0.3);
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    .character-box {
-      text-align: center;
-      margin: 20px 0 10px;
-    }
-
-    .character-box img {
-      width: 150px;
-      height: auto;
-      display: inline-block;
-    }
-
-    .speech {
-      display: inline-block;
-      background: #fffafc;
-      border: 2px dashed #f2d1d1;
-      border-radius: 18px;
-      padding: 12px 16px;
-      font-size: 14px;
-      color: #5b4039;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 14px;
-      line-height: 1.7;
-    }
-
-    .summary-item {
-      padding: 12px 0;
-      border-bottom: 1px dashed #ead7d2;
-    }
-
-    .summary-item:last-child {
-      border-bottom: none;
-    }
-
-    .summary-label {
-      font-size: 15px;
+    .feature-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #f8e9ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: #ef678f;
+      margin: 0 auto;
       font-weight: 700;
-      color: #7e4d45;
-      margin-bottom: 6px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7);
     }
 
-    .summary-value {
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 15px;
-      color: #4a342e;
+    .feature-text {
+      font-size: 20px;
+      line-height: 1.4;
+      color: #4b322a;
+      font-weight: 800;
     }
 
-    .note-box {
-      background: #fffaf4;
-      border: 1px solid #f1e1c9;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      font-size: 15px;
-    }
-
-    .small-note {
-      font-size: 13px;
-      color: #756760;
-      margin-top: 8px;
-    }
-
-    .closing {
-      text-align: center;
+    .feature-text small {
+      display: block;
       font-size: 18px;
-      font-weight: 700;
-      color: #7a5149;
-      margin-top: 18px;
+      font-weight: 500;
+      color: #5a433b;
+      margin-bottom: 2px;
     }
 
-    .closing-sub {
+    .hero-right {
+      position: relative;
+      text-align: right;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .hero-right img {
+      width: 560px;
+      max-width: none;
+      height: auto;
+      display: block;
+      position: relative;
+      right: -60px;
+    }
+
+    .cta-wrap {
+      margin-top: 28px;
+      max-width: 860px;
+    }
+
+    .cta-button {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff7fa1 0%, #f05f8c 100%);
+      color: #fff;
+      font-size: 30px;
+      font-weight: 800;
+      padding: 28px 34px;
+      cursor: pointer;
+      box-shadow:
+        0 14px 0 #d94f75,
+        0 18px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-button .flower {
+      font-size: 30px;
+    }
+
+    .cta-button .arrow {
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .privacy-note {
+      margin-top: 16px;
       text-align: center;
-      font-size: 14px;
-      color: #7c6b65;
-      margin-top: 8px;
+      color: #6f635f;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .message-box {
+      margin-top: 36px;
+      background: #fff6f8;
+      border: 3px solid #ef9eb5;
+      border-radius: 28px;
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .message-title {
+      color: #ef5f89;
+      font-size: 34px;
+      font-weight: 900;
+      margin: 0 0 12px;
+      line-height: 1.3;
+    }
+
+    .message-text {
+      color: #533d36;
+      font-size: 22px;
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    .message-deco {
+      position: absolute;
+      font-size: 34px;
+      opacity: 0.95;
+    }
+
+    .message-deco.left {
+      left: 18px;
+      bottom: 16px;
+    }
+
+    .message-deco.right {
+      right: 18px;
+      bottom: 16px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    #workArea,
-    #finalArea {
-      display: none;
+    /* 入力画面 */
+    .work-wrap {
+      max-width: 760px;
+      margin: 0 auto;
     }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 14px 32px;
+    .work-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 900;
+      margin: 10px 0 8px;
+      color: #4a2d1f;
+    }
+
+    .work-sub {
+      text-align: center;
+      font-size: 16px;
+      color: #6c5d58;
+      margin: 0 0 24px;
+    }
+
+    .work-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    .work-label {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #51372f;
+    }
+
+    .work-example {
+      background: #fff7f9;
+      border: 1px solid #f2d8df;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #7a6560;
+      margin-bottom: 14px;
+    }
+
+    .work-card label {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 14px 0 6px;
+      color: #51372f;
+    }
+
+    .work-card input,
+    .work-card textarea {
+      width: 100%;
+      border: 1px solid #e7d9d3;
+      border-radius: 16px;
+      background: #fffdfd;
+      padding: 14px 16px;
+      font-size: 16px;
+      outline: none;
+      color: #4a342e;
+    }
+
+    .work-card textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .submit-button {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff7fa1 0%, #f05f8c 100%);
+      color: #fff;
+      font-size: 24px;
+      font-weight: 800;
+      padding: 20px;
+      cursor: pointer;
+      box-shadow:
+        0 12px 20px rgba(240, 95, 140, 0.25),
+        inset 0 -5px 0 rgba(0,0,0,0.08);
+    }
+
+    /* 完了画面 */
+    .final-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .final-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 900;
+      color: #4a2d1f;
+      margin: 12px 0 8px;
+    }
+
+    .final-sub {
+      text-align: center;
+      font-size: 16px;
+      color: #6c5d58;
+      margin: 0 0 22px;
+    }
+
+    .summary-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      margin-bottom: 18px;
+    }
+
+    .summary-row {
+      padding: 12px 0;
+      border-bottom: 1px dashed #eadbd5;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-head {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #51372f;
+    }
+
+    .summary-value {
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #4f3b35;
+      font-size: 16px;
+    }
+
+    .save-card {
+      background: #fffaf4;
+      border: 1px solid #f1e1c9;
+      border-radius: 20px;
+      padding: 18px 20px;
+      font-size: 17px;
+      color: #4e3a34;
+      margin-bottom: 18px;
+    }
+
+    .save-small {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #786a63;
+    }
+
+    .step-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      margin-bottom: 18px;
+    }
+
+    .step-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #4a2d1f;
+    }
+
+    .step-card p {
+      margin: 0 0 12px;
+      font-size: 15px;
+      color: #6b5d58;
+    }
+
+    .step-card input {
+      width: 100%;
+      border: 1px solid #e7d9d3;
+      border-radius: 16px;
+      background: #fffdfd;
+      padding: 14px 16px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .final-character-row {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .speech {
+      background: #ffe5ec;
+      border-radius: 24px;
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #5b4039;
+      line-height: 1.6;
+      max-width: 320px;
+      position: relative;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+    }
+
+    .speech::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      bottom: -12px;
+      width: 22px;
+      height: 22px;
+      background: #ffe5ec;
+      transform: rotate(45deg);
+      border-bottom-right-radius: 6px;
+    }
+
+    .final-character {
+      text-align: center;
+    }
+
+    .final-character img {
+      width: 180px;
+      height: auto;
+      display: inline-block;
+      border-radius: 20px;
+      background: #fff;
+      padding: 8px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .final-button {
+      margin-top: 26px;
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ff7fa1 0%, #f05f8c 100%);
+      color: #fff;
+      font-size: 24px;
+      font-weight: 800;
+      padding: 20px;
+      cursor: pointer;
+      box-shadow:
+        0 12px 20px rgba(240, 95, 140, 0.25),
+        inset 0 -5px 0 rgba(0,0,0,0.08);
+    }
+
+    .final-message {
+      text-align: center;
+      margin-top: 18px;
+      color: #6e625d;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 900px) {
+      .landing {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 8px;
+      }
+
+      .hero-right {
+        text-align: center;
+        order: 2;
+        min-height: auto;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      .hero-right img {
+        width: 320px;
+        max-width: 88vw;
+        right: 0;
+      }
+
+      .feature-list {
+        max-width: 100%;
+      }
+
+      .lead {
+        font-size: 20px;
+        max-width: 100%;
       }
 
       .hero-title {
-        font-size: 24px;
+        font-size: 62px;
       }
 
-      .card {
-        padding: 16px;
+      .hero-title .accent {
+        font-size: 52px;
       }
 
-      .card-floral::before {
-        margin: -16px -16px 12px;
+      .badge {
+        font-size: 16px;
       }
 
-      .character-box img {
-        width: 120px;
+      .feature {
+        text-align: left;
+      }
+
+      .cta-wrap {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .top-floral {
+        height: 102px;
+        border-bottom-left-radius: 52px;
+        border-bottom-right-radius: 52px;
+      }
+
+      .top-floral::after {
+        bottom: -28px;
+        height: 58px;
+        border-top-left-radius: 70px;
+        border-top-right-radius: 70px;
+      }
+
+      .container {
+        padding: 20px 14px 40px;
+      }
+
+      .hero-title {
+        font-size: 52px;
+      }
+
+      .hero-title .accent {
+        font-size: 44px;
+      }
+
+      .badge {
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 14px;
+      }
+
+      .lead {
+        font-size: 18px;
+        margin-top: 16px;
+      }
+
+      .feature {
+        grid-template-columns: 72px 1fr;
+        padding: 14px 14px;
+        border-radius: 20px;
+      }
+
+      .feature-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 28px;
+      }
+
+      .feature-text {
+        font-size: 16px;
+      }
+
+      .feature-text small {
+        font-size: 16px;
+      }
+
+      .cta-button {
+        font-size: 22px;
+        padding: 18px 20px;
+        box-shadow:
+          0 10px 0 #d94f75,
+          0 14px 22px rgba(0, 0, 0, 0.14);
+      }
+
+      .privacy-note {
+        font-size: 15px;
+      }
+
+      .message-title {
+        font-size: 26px;
+      }
+
+      .message-text {
+        font-size: 17px;
+        line-height: 1.8;
+      }
+
+      .message-box {
+        padding: 22px 18px;
+      }
+
+      .speech {
+        font-size: 18px;
+        max-width: 100%;
+      }
+
+      .final-character img {
+        width: 150px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="top-floral"></div>
+  <div class="page">
+    <div class="top-floral"></div>
 
-  <div class="container">
+    <div class="container">
+      <!-- 表紙 -->
+      <section id="startArea">
+        <div class="landing">
+          <div class="hero-left">
+            <div class="badge">理想の未来をつくる第一歩</div>
 
-    <!-- 表紙 -->
-    <div id="startArea">
-      <h1 class="hero-title">未来設計ワーク</h1>
-      <p class="hero-sub">
-        頭の中にある理想を、<br>
-        言葉にして整えていきましょう。
-      </p>
+            <h1 class="hero-title">
+              未来設計
+              <span class="accent">ワークシート</span>
+            </h1>
 
-      <div class="card card-floral">
-        書くだけで、今の気持ちや理想が見えやすくなります。<br>
-        焦らなくて大丈夫です。<br>
-        ひとつずつ進めていきましょう。
-      </div>
+            <p class="lead">
+              専業主婦になりたいあなたへ。<br>
+              理想の生活を見える化して、<br>
+              今日から一緒に整えていきましょう。
+            </p>
 
-      <div class="character-box">
-        <img src="character1.png" alt="スタートのキャラクター">
-      </div>
+            <div class="feature-list">
+              <div class="feature">
+                <div class="feature-icon">✎</div>
+                <div class="feature-text">
+                  <small>書くだけで</small>
+                  頭の中が整理される
+                </div>
+              </div>
 
-      <button class="button" onclick="startWork()">ワークを始める</button>
+              <div class="feature">
+                <div class="feature-icon">⌗</div>
+                <div class="feature-text">
+                  <small>いくら必要か</small>
+                  自分でわかる
+                </div>
+              </div>
+
+              <div class="feature">
+                <div class="feature-icon">✦</div>
+                <div class="feature-text">
+                  <small>理想の生活に向けて</small>
+                  具体的に動き出せる
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <img src="character1.jpg" alt="表紙キャラクター">
+          </div>
+        </div>
+
+        <div class="cta-wrap">
+          <button class="cta-button" onclick="startWork()">
+            <span class="flower">🌸</span>
+            ワークを始める
+            <span class="arrow">›</span>
+          </button>
+          <div class="privacy-note">🔒 入力内容は保存されません。安心してご利用ください。</div>
+        </div>
+
+        <div class="message-box">
+          <div class="message-title">焦らなくて大丈夫です。</div>
+          <p class="message-text">
+            今の気持ちを書き出すことが、未来を変える一番の近道です。<br>
+            一緒に少しずつ進んでいきましょう。
+          </p>
+          <div class="message-deco left">🌸</div>
+          <div class="message-deco right">🌼</div>
+        </div>
+      </section>
+
+      <!-- 入力画面 -->
+      <section id="workArea" class="hidden">
+        <div class="work-wrap">
+          <h2 class="work-title">未来設計ワーク</h2>
+          <p class="work-sub">ひとつずつ書いて、気持ちを整えていきましょう。</p>
+
+          <div class="work-card">
+            <div class="work-label">お金の整理</div>
+
+            <label for="money">自分にはいくら必要ですか？</label>
+            <input id="money" type="text" placeholder="例：100万円">
+
+            <label for="deadline">いつまでに必要ですか？</label>
+            <input id="deadline" type="text" placeholder="例：1年後まで">
+
+            <label for="purpose">なんのために必要ですか？</label>
+            <textarea id="purpose" placeholder="例：生活を整えるため"></textarea>
+          </div>
+
+          <div class="work-card">
+            <div class="work-label">理想の生活</div>
+            <div class="work-example">
+              ・時間に余裕のある生活をしている<br>
+              ・好きなことに集中できる毎日を送っている<br>
+              ・お金に対する不安がない状態で過ごしている<br>
+              ・なぜか私はうまくいく気がする
+            </div>
+            <textarea id="ideal" placeholder="ここに書いてください"></textarea>
+          </div>
+
+          <div class="work-card">
+            <div class="work-label">やりたくないこと</div>
+            <div class="work-example">
+              ・掃除<br>
+              ・洗濯<br>
+              ・食器洗い<br>
+              ・食事づくり
+            </div>
+            <textarea id="hate" placeholder="ここに書いてください"></textarea>
+          </div>
+
+          <div class="work-card">
+            <div class="work-label">解決のアイデア</div>
+            <div class="work-example">
+              ・仕組みを変える<br>
+              ・人に任せる<br>
+              ・回数を減らす<br>
+              ・お金を使う方法も含めて自由に考える
+            </div>
+            <textarea id="solve" placeholder="ここに書いてください"></textarea>
+          </div>
+
+          <div class="work-card">
+            <div class="work-label">未来の状態</div>
+            <div class="work-example">
+              ・孫にお金の心配なく好きなものを買ってあげている<br>
+              ・行きたい国へお金を気にせず旅行している<br>
+              ・ジムに通い健康的な体で過ごしている
+            </div>
+            <textarea id="future" placeholder="ここに書いてください"></textarea>
+          </div>
+
+          <button class="submit-button" onclick="finishWork()">完了する</button>
+        </div>
+      </section>
+
+      <!-- 完了画面 -->
+      <section id="finalArea" class="hidden">
+        <div class="final-wrap">
+          <h2 class="final-title">ここまでできたあなたはすごいです</h2>
+          <p class="final-sub">入力した内容を見返しやすくまとめました。</p>
+
+          <div class="summary-card">
+            <div class="summary-row">
+              <div class="summary-head">お金</div>
+              <div class="summary-value" id="r_moneyBlock"></div>
+            </div>
+
+            <div class="summary-row">
+              <div class="summary-head">理想の生活</div>
+              <div class="summary-value" id="r_ideal"></div>
+            </div>
+
+            <div class="summary-row">
+              <div class="summary-head">やりたくないこと</div>
+              <div class="summary-value" id="r_hate"></div>
+            </div>
+
+            <div class="summary-row">
+              <div class="summary-head">解決のアイデア</div>
+              <div class="summary-value" id="r_solve"></div>
+            </div>
+
+            <div class="summary-row">
+              <div class="summary-head">未来の状態</div>
+              <div class="summary-value" id="r_future"></div>
+            </div>
+          </div>
+
+          <div class="save-card">
+            入力内容は保存されません。<br>
+            大切な内容なので、スクリーンショットをおすすめします。
+            <div class="save-small">※電源ボタン＋音量ボタンで保存できます</div>
+          </div>
+
+          <div class="step-card">
+            <h3>今日できる小さな一歩</h3>
+            <p>小さな一歩で大丈夫です。</p>
+            <input id="smallStep" type="text" placeholder="例：理想を1つ書き足す">
+          </div>
+
+          <div class="final-character-row">
+            <div class="speech">
+              ここまでできましたね<br>
+              ここからがスタートです
+            </div>
+            <div class="final-character">
+              <img src="character2.png" alt="完了後のキャラクター">
+            </div>
+          </div>
+
+          <button class="final-button" onclick="restartWork()">もう一度ワークをする</button>
+
+          <div class="final-message">
+            焦らなくて大丈夫です。<br>
+            少しずつ整えていきましょう。
+          </div>
+        </div>
+      </section>
     </div>
-
-    <!-- 入力画面 -->
-    <div id="workArea">
-      <h1 class="hero-title">未来設計ワーク</h1>
-      <p class="hero-sub">
-        ひとつずつ書いて、気持ちを整えていきましょう。
-      </p>
-
-      <div class="card card-floral">
-        <div class="step-label">STEP 1</div>
-        <h2 class="section-title">お金の整理</h2>
-        <p class="section-desc">まずは、お金のことを具体的にします。</p>
-
-        <label for="money">自分にはいくら必要ですか？</label>
-        <input id="money" type="text" placeholder="例：100万円">
-
-        <label for="deadline">いつまでに必要ですか？</label>
-        <input id="deadline" type="text" placeholder="例：1年後まで">
-
-        <label for="purpose">なんのために必要ですか？</label>
-        <textarea id="purpose" placeholder="例：生活を整えるため"></textarea>
-      </div>
-
-      <div class="card">
-        <div class="step-label">STEP 2</div>
-        <h2 class="section-title">理想の生活</h2>
-        <div class="example-box">
-          ・時間に余裕のある生活をしている<br>
-          ・好きなことに集中できる毎日を送っている<br>
-          ・お金に対する不安がない状態で過ごしている<br>
-          ・なぜか私はうまくいく気がする
-        </div>
-        <textarea id="ideal" placeholder="ここに書いてください"></textarea>
-      </div>
-
-      <div class="card">
-        <div class="step-label">STEP 3</div>
-        <h2 class="section-title">やりたくないこと</h2>
-        <div class="example-box">
-          ・掃除<br>
-          ・洗濯<br>
-          ・食器洗い<br>
-          ・食事づくり
-        </div>
-        <textarea id="hate" placeholder="ここに書いてください"></textarea>
-      </div>
-
-      <div class="card">
-        <div class="step-label">STEP 4</div>
-        <h2 class="section-title">解決のアイデア</h2>
-        <div class="example-box">
-          ・仕組みを変える<br>
-          ・人に任せる<br>
-          ・回数を減らす<br>
-          ・お金を使う方法も含めて自由に考える
-        </div>
-        <textarea id="solve" placeholder="ここに書いてください"></textarea>
-      </div>
-
-      <div class="card">
-        <div class="step-label">STEP 5</div>
-        <h2 class="section-title">未来の状態</h2>
-        <div class="example-box">
-          ・子供にお金の心配なく好きなものを買ってあげている<br>
-          ・行きたい国へお金を気にせず旅行している<br>
-          ・ジムに通い健康的な体で過ごしている
-        </div>
-        <textarea id="future" placeholder="ここに書いてください"></textarea>
-      </div>
-
-      <button class="button" onclick="finishWork()">完了する</button>
-    </div>
-
-    <!-- 最終画面 -->
-    <div id="finalArea">
-      <h1 class="hero-title">ここまでできたあなたはすごいです</h1>
-      <p class="hero-sub">入力した内容を見返しやすくまとめました。</p>
-
-      <div class="card card-floral">
-        <div class="summary-item">
-          <div class="summary-label">お金</div>
-          <div class="summary-value" id="r_moneyBlock"></div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-label">理想の生活</div>
-          <div class="summary-value" id="r_ideal"></div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-label">やりたくないこと</div>
-          <div class="summary-value" id="r_hate"></div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-label">解決のアイデア</div>
-          <div class="summary-value" id="r_solve"></div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-label">未来の状態</div>
-          <div class="summary-value" id="r_future"></div>
-        </div>
-      </div>
-
-      <div class="note-box">
-        入力内容は保存されません。<br>
-        大切な内容なので、スクリーンショットをおすすめします。<br><br>
-        あとで見返せるように保存しておきましょう。
-        <div class="small-note">※電源ボタン＋音量ボタンで保存できます</div>
-      </div>
-
-      <div class="card">
-        <h2 class="section-title">今日できる小さな一歩</h2>
-        <p class="section-desc">小さな一歩で大丈夫です。</p>
-        <input id="smallStep" type="text" placeholder="例：理想を1つ書き足す">
-      </div>
-
-      <div class="center" style="margin-top:20px;">
-        <div class="speech">
-          ここまでできましたね<br>
-          ここからがスタートです
-        </div>
-      </div>
-
-      <div class="character-box" style="margin-top:0;">
-        <img src="character2.png" alt="完了後のキャラクター">
-      </div>
-
-      <div class="closing">焦らなくて大丈夫です</div>
-      <div class="closing-sub">少しずつ整えていきましょう</div>
-    </div>
-
   </div>
 
   <script>
@@ -437,8 +875,9 @@
     }
 
     function startWork() {
-      document.getElementById("startArea").style.display = "none";
-      document.getElementById("workArea").style.display = "block";
+      document.getElementById("startArea").classList.add("hidden");
+      document.getElementById("finalArea").classList.add("hidden");
+      document.getElementById("workArea").classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -461,8 +900,17 @@
       document.getElementById("r_solve").innerText = solve;
       document.getElementById("r_future").innerText = future;
 
-      document.getElementById("workArea").style.display = "none";
-      document.getElementById("finalArea").style.display = "block";
+      document.getElementById("workArea").classList.add("hidden");
+      document.getElementById("startArea").classList.add("hidden");
+      document.getElementById("finalArea").classList.remove("hidden");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function restartWork() {
+      document.getElementById("startArea").classList.remove("hidden");
+      document.getElementById("workArea").classList.add("hidden");
+      document.getElementById("finalArea").classList.add("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
